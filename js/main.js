@@ -918,10 +918,15 @@
         if (section.getBoundingClientRect().top < stickyTop - 1) {
           window.removeEventListener('scroll', onScrollAway, false);
           var delta = pin.offsetHeight - section.offsetHeight;
-          section.style.position = 'static';
-          section.style.top      = '';
-          pin.style.height       = '';
-          window.scrollTo({ top: window.scrollY - delta, behavior: 'instant' });
+          /* Collapse pin and compensate scroll in the same synchronous block —
+             both mutations land in one paint frame, no visible jump.
+             Do NOT override section position: sticky resolves itself once the
+             pin returns to its natural height.
+             scrollTop assignment is unconditionally instant on all browsers;
+             scrollTo({behavior:'instant'}) is silently ignored on iOS Safari. */
+          pin.style.height = '';
+          document.documentElement.scrollTop -= delta;
+          document.body.scrollTop            -= delta;
         }
       }
       window.addEventListener('scroll', onScrollAway, { passive: true });
