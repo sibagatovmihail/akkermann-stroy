@@ -879,29 +879,36 @@
 
   /* --- Process section scroll-driven animation (Apple-style sticky) ---
      .process-pin is a tall container; .process is position:sticky inside it.
-     JS reads scroll progress from getBoundingClientRect and drives opacity +
-     translateY on each step directly — no event hijacking, no scroll lock. */
+     JS drives opacity + translateY on each step via scroll progress.
+
+     Cleanup strategy (no scroll compensation, no jump):
+     After the animation finishes, wait until the section has scrolled
+     completely off-screen above the viewport, then collapse the pin.
+     The browser's scroll anchoring (overflow-anchor:auto — on by default
+     in all modern browsers) automatically adjusts scrollY to keep the
+     visible content stationary. Also sets top:-9999px to prevent the
+     sticky from re-engaging when the user scrolls back up. */
   function initProcessAnimation() {
     var steps   = document.querySelectorAll('.process__step');
     var section = document.querySelector('.process');
     var pin     = document.querySelector('.process-pin');
     if (!steps.length || !section || !pin) return;
 
-    /* Each step gets RANGE_PX of scroll to go from invisible → fully visible. */
     var RANGE_PX = 300;
+    var done = false;
 
     function headerH() {
       return parseFloat(getComputedStyle(document.documentElement)
         .getPropertyValue('--header-height')) || 0;
     }
 
-    /* Make the pin tall enough that all steps finish revealing before
-       the section un-sticks, with one extra RANGE_PX of breathing room. */
     function setup() {
-      pin.style.height = (section.offsetHeight + (steps.length + 1) * RANGE_PX) + 'px';
+      if (done) return;
+      /* No breathing room beyond what the animation needs. The section
+         un-sticks ~space-section px after the last step finishes, so the
+         sticky lock ends almost immediately after the animation. */
+      pin.style.height = (section.offsetHeight + steps.length * RANGE_PX) + 'px';
     }
-
-    var done = false;
 
     function finish() {
       done = true;
@@ -910,45 +917,38 @@
         step.style.opacity   = '1';
         step.style.transform = 'translateY(0)';
       });
-      /* Fire the moment the section starts naturally un-sticking (its top drops
-         below the CSS sticky top value). Compensate scrollY by the removed
-         height so all content below stays visually frozen — zero visible jump. */
-      var stickyTop = parseFloat(getComputedStyle(section).top) || 0;
-      function onScrollAway() {
-        if (section.getBoundingClientRect().top < stickyTop - 1) {
-          window.removeEventListener('scroll', onScrollAway, false);
-          var delta = pin.offsetHeight - section.offsetHeight;
-          /* Collapse pin and compensate scroll in the same synchronous block —
-             both mutations land in one paint frame, no visible jump.
-             Do NOT override section position: sticky resolves itself once the
-             pin returns to its natural height.
-             scrollTop assignment is unconditionally instant on all browsers;
-             scrollTo({behavior:'instant'}) is silently ignored on iOS Safari. */
-          pin.style.height = '';
-          document.documentElement.scrollTop -= delta;
-          document.body.scrollTop            -= delta;
-        }
-      }
-      window.addEventListener('scroll', onScrollAway, { passive: true });
+
+      /* Wait until the section is fully off-screen above the viewport, then
+         collapse the pin and permanently disable sticky. This is the earliest
+         moment the two DOM mutations are invisible (section not rendered), so
+         scroll anchoring can silently rebase scrollY with zero visible change.
+         Firing any earlier (while section is still visible) causes a violent
+         jump because the 1200px position difference between sticky and natural
+         flow becomes visible before anchoring can compensate. */
+      var io = new IntersectionObserver(function (entries) {
+        var entry = entries[0];
+        if (entry.isIntersecting) return;
+        if (entry.boundingClientRect.bottom > 0) return;
+        io.disconnect();
+        pin.style.height  = '';
+        section.style.top = '-9999px';
+      }, { threshold: 0 });
+      io.observe(section);
     }
 
     function onScroll() {
-      var hh      = headerH();
-      var scrolled = hh - pin.getBoundingClientRect().top;
-
+      var scrolled = headerH() - pin.getBoundingClientRect().top;
       steps.forEach(function (step, i) {
         var progress = Math.max(0, Math.min(1, (scrolled - i * RANGE_PX) / RANGE_PX));
         step.style.opacity   = progress;
         step.style.transform = 'translateY(' + ((1 - progress) * 2).toFixed(2) + 'rem)';
       });
-
-      /* Once all steps are fully visible, lock them in place permanently. */
       if (scrolled >= steps.length * RANGE_PX) finish();
     }
 
     setup();
     window.addEventListener('load', function () { setup(); if (!done) onScroll(); });
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll,  { passive: true });
     window.addEventListener('resize', function () { if (!done) setup(); }, { passive: true });
     onScroll();
   }
