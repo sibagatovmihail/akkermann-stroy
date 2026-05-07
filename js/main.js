@@ -944,7 +944,7 @@
     setup();
     window.addEventListener('load', function () { setup(); if (!done) onScroll(); });
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', function () { setup(); }, { passive: true });
+    window.addEventListener('resize', function () { if (!done) setup(); }, { passive: true });
     onScroll();
   }
 
