@@ -896,15 +896,12 @@
     }
 
     /* Make the pin tall enough that all steps finish revealing before
-       the section un-sticks, with one extra RANGE_PX of breathing room.
-       Guard: once cleanup is done, never re-inflate (iOS fires resize on
-       address-bar hide/show, which would undo the collapsed height). */
-    var done = false;
-
+       the section un-sticks, with one extra RANGE_PX of breathing room. */
     function setup() {
-      if (done) return;
       pin.style.height = (section.offsetHeight + (steps.length + 1) * RANGE_PX) + 'px';
     }
+
+    var done = false;
 
     function finish() {
       done = true;
@@ -915,20 +912,16 @@
       });
       /* Fire the moment the section starts naturally un-sticking (its top drops
          below the CSS sticky top value). Compensate scrollY by the removed
-         height so all content below stays visually frozen — zero visible jump.
-         Use the two-argument scrollTo(x,y) form — universally instant on all
-         browsers including iOS Safari which ignores { behavior:'instant' }. */
+         height so all content below stays visually frozen — zero visible jump. */
       var stickyTop = parseFloat(getComputedStyle(section).top) || 0;
       function onScrollAway() {
         if (section.getBoundingClientRect().top < stickyTop - 1) {
           window.removeEventListener('scroll', onScrollAway, false);
           var delta = pin.offsetHeight - section.offsetHeight;
-          /* Collapse pin and compensate scroll in the same synchronous block so
-             both mutations land in one paint frame — no position override needed
-             (sticky resolves itself once the pin is its natural height). */
-          pin.style.height = '';
-          document.documentElement.scrollTop -= delta;
-          document.body.scrollTop -= delta; /* Safari */
+          section.style.position = 'static';
+          section.style.top      = '';
+          pin.style.height       = '';
+          window.scrollTo({ top: window.scrollY - delta, behavior: 'instant' });
         }
       }
       window.addEventListener('scroll', onScrollAway, { passive: true });

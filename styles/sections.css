@@ -819,7 +819,6 @@
 /* --- PROCESS --- */
 .process-pin {
   position: relative;
-  background-color: var(--color-surface);
 }
 
 .process {
