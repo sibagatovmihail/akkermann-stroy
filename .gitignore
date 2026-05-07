@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Raw source media (WhatsApp exports)
+WhatsApp Image*
+WhatsApp Video*
+
+# Claude project files
+CLAUDE.md
+.claude/

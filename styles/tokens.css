@@ -1,0 +1,111 @@
+/* ========================================
+   AkkermanStroy — Design Tokens
+   ======================================== */
+
+/* --- Colors --- */
+:root {
+  /* Brand */
+  --color-primary:     #003e6b;
+  --color-accent:      #f8b600;
+  --color-dark:        #09090b;
+
+  /* Text */
+  --color-text-heading: #2d2f2f;
+  --color-text-body:    #5a5c5c;
+  --color-text-light:   rgba(255, 255, 255, 0.7);
+  --color-text-white:   #ffffff;
+  --color-eyebrow:      #6c5a00;
+  --color-btn-text:     #453900;
+  --color-nav-link:     #52525b;
+  --color-grey:         #c0c0c0;
+  --color-label:        #71717a;
+
+  /* Surfaces */
+  --color-surface:     #ffffff;
+  --color-surface-alt: #f4f6fa;
+
+  /* Borders */
+  --color-border:        rgba(0, 62, 107, 0.08);
+  --color-border-card:   rgba(172, 173, 173, 0.2);
+  --color-border-input:  rgba(0, 62, 107, 0.15);
+  --color-border-footer: rgba(255, 255, 255, 0.1);
+  --color-section-border: rgba(172, 173, 173, 0.1);
+  --color-divider:       #dbdddd;
+
+  /* Misc surfaces */
+  --color-icon-bg:     rgba(0, 62, 107, 0.06);
+  --color-accent-bg:   rgba(248, 182, 0, 0.12);
+  --color-input-bg:    #f8f9fa;
+  --color-placeholder: rgba(90, 92, 92, 0.4);
+  --color-tag-bg:      rgba(255, 255, 255, 0.9);
+  --color-pill-bg:     #f0f1f1;
+
+  /* --- Typography --- */
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body:    'Helvetica', 'Arial', sans-serif;
+  --font-accent:  'Manrope', sans-serif;
+  --font-meta:    'Inter', sans-serif;
+
+  /* Font sizes */
+  --text-h1:   4.5rem;     /* 72px */
+  --text-h2:   3rem;       /* 48px */
+  --text-h3:   1.5rem;     /* 24px */
+  --text-h4:   1rem;       /* 16px */
+  --text-h5:   1.25rem;    /* 20px */
+  --text-p1:   1.25rem;    /* 20px */
+  --text-p2:   1rem;       /* 16px */
+  --text-p3:   0.875rem;   /* 14px */
+  --text-sm:   0.75rem;    /* 12px */
+  --text-xs:   0.6875rem;  /* 11px */
+  --text-tag:  0.625rem;   /* 10px */
+  --text-stat: 3rem;       /* 48px */
+
+  /* Line heights */
+  --leading-h1:   1;
+  --leading-h2:   1.125;   /* 54/48 */
+  --leading-h3:   1.333;   /* 32/24 */
+  --leading-body: 1.5;
+  --leading-card: 1.4286;  /* 20/14 */
+
+  /* Font weights */
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+  --weight-extrabold: 800;
+
+  /* Letter spacing */
+  --tracking-tight:   -0.09375rem;  /* -1.5px */
+  --tracking-eyebrow:  0.25rem;     /* 4px */
+  --tracking-label:    0.09375rem;  /* 1.5px */
+  --tracking-tag:      0.0625rem;   /* 1px */
+
+  /* --- Spacing --- */
+  --space-xs:      0.25rem;   /* 4px */
+  --space-sm:      0.5rem;    /* 8px */
+  --space-md:      1rem;      /* 16px */
+  --space-lg:      1.5rem;    /* 24px */
+  --space-xl:      2rem;      /* 32px */
+  --space-2xl:     3rem;      /* 48px */
+  --space-3xl:     3.5rem;    /* 56px */
+  --space-4xl:     4rem;      /* 64px */
+  --space-5xl:     5.75rem;   /* 92px */
+  --space-6xl:     6rem;      /* 96px */
+  --space-hero-gap: 2.25rem;  /* 36px — hero heading-to-CTA gap */
+  --space-section: 7.5rem;    /* 120px */
+
+  /* --- Layout --- */
+  --container-max:  80rem;    /* 1280px */
+  --header-height:  6rem;     /* 96px — updated by JS */
+
+  /* --- Border Radius --- */
+  --radius-section: 2.5rem;   /* 40px */
+  --radius-card:    1rem;     /* 16px */
+  --radius-btn:     0.5rem;   /* 8px */
+  --radius-nav:     1.25rem;  /* 20px */
+  --radius-badge:   0.25rem;  /* 4px */
+  --radius-step:    0.75rem;  /* 12px */
+
+  /* --- Transitions --- */
+  --ease-default: 0.3s ease;
+}
