@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://akkermann-stroy.de/sitemap.xml
