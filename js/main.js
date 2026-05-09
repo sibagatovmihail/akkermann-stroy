@@ -376,17 +376,33 @@
     });
 
     /* Swipe + tap-to-open */
-    var touchStartX = 0;
-    var touchMoved  = false;
+    var touchStartX   = 0;
+    var touchBaseOffset = 0;
+    var touchMoved    = false;
+    var isDragging    = false;
+
     sliderViewport.addEventListener('touchstart', function (e) {
-      touchStartX = e.touches[0].clientX;
-      touchMoved  = false;
+      touchStartX    = e.touches[0].clientX;
+      touchBaseOffset = sliderGetOffset(sliderCurrent);
+      touchMoved     = false;
+      isDragging     = true;
+      sliderTrack.style.transition = 'none';
     }, { passive: true });
+
+    sliderViewport.addEventListener('touchmove', function (e) {
+      if (!isDragging) return;
+      var dx = e.touches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 5) touchMoved = true;
+      sliderTrack.style.transform = 'translateX(' + (touchBaseOffset + dx) + 'px)';
+    }, { passive: true });
+
     sliderViewport.addEventListener('touchend', function (e) {
+      isDragging = false;
       var dx = e.changedTouches[0].clientX - touchStartX;
       if (Math.abs(dx) > 40) {
-        touchMoved = true;
         sliderGoTo(sliderCurrent + (dx < 0 ? 1 : -1), true);
+      } else {
+        sliderGoTo(sliderCurrent, true);
       }
     }, { passive: true });
     sliderViewport.addEventListener('click', function (e) {

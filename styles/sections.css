@@ -766,6 +766,7 @@
 .gallery__slider-viewport {
   overflow: visible;
   width: 100%;
+  touch-action: pan-y;
 }
 
 .gallery__slider-track {
@@ -779,6 +780,8 @@
   border-radius: var(--radius-card);
   overflow: hidden;
   cursor: pointer;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
   transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
               opacity  0.4s ease;
 }
