@@ -131,17 +131,59 @@
     overlay.setAttribute('aria-hidden', 'false');
   }
 
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  function showFieldError(input, errorEl) {
+    if (input)   input.classList.add('form-group__input--error');
+    if (errorEl) errorEl.hidden = false;
+  }
+  function clearFieldError(input, errorEl) {
+    if (input)   input.classList.remove('form-group__input--error');
+    if (errorEl) errorEl.hidden = true;
+  }
+
   function handleFormSubmit(e) {
     e.preventDefault();
 
-    var name    = document.getElementById('contact-name');
-    var email   = document.getElementById('contact-email');
-    var message = document.getElementById('contact-message');
-    var service = document.getElementById('contact-service');
+    var firstname = document.getElementById('contact-firstname');
+    var name      = document.getElementById('contact-name');
+    var phone     = document.getElementById('contact-phone');
+    var phoneErr  = document.getElementById('contact-phone-error');
+    var email     = document.getElementById('contact-email');
+    var emailErr  = document.getElementById('contact-email-error');
+    var message   = document.getElementById('contact-message');
+    var service   = document.getElementById('contact-service');
 
-    if (!name.value.trim() || !email.value.trim() || !message.value.trim() || !service.value) {
-      return;
+    var valid = true;
+
+    if (!firstname.value.trim() || !name.value.trim() || !message.value.trim() || !service.value) {
+      valid = false;
     }
+
+    /* Email: required + valid format */
+    var emailVal = email.value.trim();
+    if (!emailVal || !EMAIL_RE.test(emailVal)) {
+      showFieldError(email, emailErr);
+      valid = false;
+    } else {
+      clearFieldError(email, emailErr);
+    }
+
+    /* Phone: optional, but if filled must be 7-15 digits */
+    var phoneVal = phone.value.trim();
+    if (phoneVal) {
+      var digits = phoneVal.replace(/\D/g, '');
+      if (digits.length < 7 || digits.length > 15) {
+        showFieldError(phone, phoneErr);
+        valid = false;
+      } else {
+        clearFieldError(phone, phoneErr);
+      }
+    } else {
+      clearFieldError(phone, phoneErr);
+    }
+
+    if (!valid) return;
 
     var submitBtn = contactForm.querySelector('.contact__form-submit');
     var label     = submitBtn.querySelector('.btn__label span');
@@ -1138,6 +1180,21 @@
 
     if (contactForm) {
       contactForm.addEventListener('submit', handleFormSubmit);
+
+      var phoneInput = document.getElementById('contact-phone');
+      var phoneErr   = document.getElementById('contact-phone-error');
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function () {
+          clearFieldError(phoneInput, phoneErr);
+        });
+      }
+      var emailInput = document.getElementById('contact-email');
+      var emailErr   = document.getElementById('contact-email-error');
+      if (emailInput) {
+        emailInput.addEventListener('input', function () {
+          clearFieldError(emailInput, emailErr);
+        });
+      }
     }
     initSuccessModal();
 

@@ -71,7 +71,7 @@
     <header class="navbar">
       <div class="navbar__inner">
         <div class="navbar__logo-wrap">
-          <a href="./" class="navbar__logo" aria-label="AkkermanStroy Startseite">
+          <a href="index.html" class="navbar__logo" aria-label="AkkermanStroy Startseite">
             <img src="assets/images/logo-nav.png" alt="AkkermanStroy" class="navbar__logo-img">
           </a>
         </div>
@@ -231,17 +231,27 @@
               <div class="contact__form-fields">
                 <div class="contact__form-row">
                   <div class="form-group">
-                    <div class="form-group__label-cover"><label for="contact-name">Name</label></div>
-                    <div class="form-group__input-cover"><input type="text" id="contact-name" name="name" placeholder="Ihr Name" required></div>
+                    <div class="form-group__label-cover"><label for="contact-firstname">Vorname</label></div>
+                    <div class="form-group__input-cover"><input type="text" id="contact-firstname" name="firstname" placeholder="Ihr Vorname" required></div>
                   </div>
                   <div class="form-group">
-                    <div class="form-group__label-cover"><label for="contact-phone">Telefon</label></div>
-                    <div class="form-group__input-cover"><input type="tel" id="contact-phone" name="phone" placeholder="Ihre Rufnummer"></div>
+                    <div class="form-group__label-cover"><label for="contact-name">Nachname</label></div>
+                    <div class="form-group__input-cover"><input type="text" id="contact-name" name="name" placeholder="Ihr Nachname" required></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-group__label-cover"><label for="contact-phone">Telefon</label></div>
+                  <div class="form-group__input-cover">
+                    <input type="tel" id="contact-phone" name="phone" placeholder="Ihre Rufnummer">
+                    <span class="form-group__error" id="contact-phone-error" hidden>Bitte gültige Telefonnummer eingeben.</span>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="form-group__label-cover"><label for="contact-email">E-mail</label></div>
-                  <div class="form-group__input-cover"><input type="email" id="contact-email" name="email" placeholder="ihre@email.de" required></div>
+                  <div class="form-group__input-cover">
+                    <input type="email" id="contact-email" name="email" placeholder="ihre@email.de" required>
+                    <span class="form-group__error" id="contact-email-error" hidden>Bitte gültige E-Mail-Adresse eingeben.</span>
+                  </div>
                 </div>
                 <div class="form-group">
                   <div class="form-group__label-cover"><label for="contact-service">Gewünschte Leistung</label></div>

@@ -541,6 +541,23 @@
   border-color: var(--color-primary);
 }
 
+.form-group__input-cover input.form-group__input--error,
+.form-group__input-cover textarea.form-group__input--error {
+  border-color: #c8201f;
+}
+
+.form-group__error {
+  display: block;
+  margin-top: var(--space-xs);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: #c8201f;
+}
+
+.form-group__error[hidden] {
+  display: none;
+}
+
 /* --- Custom form select (mirrors nav-dropdown) --- */
 .form-select {
   position: relative;
