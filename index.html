@@ -6,6 +6,18 @@
   <title>AkkermanStroy — Ihr Partner für Innenausbau & Sanierung in Berlin & MV</title>
   <meta name="description" content="Professioneller Innen- und Außenausbau in Berlin und Mecklenburg-Vorpommern. Trockenbau, Boden, Fliesen, Maler, Fassaden und Komplettsanierung – alles aus einer Hand.">
 
+  <!-- Cookiebot -->
+  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="5125f22d-6dc1-4e6c-a9a7-93bbb3901a02" data-blockingmode="auto" type="text/javascript"></script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E782S147EQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E782S147EQ');
+  </script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,11 +81,11 @@
                 </svg>
               </button>
               <ul class="nav-dropdown__menu" role="menu">
-                <li class="nav-dropdown__link" role="none"><a href="#services" role="menuitem">Badrenovierung</a></li>
-                <li class="nav-dropdown__link" role="none"><a href="#services" role="menuitem">Bodenverlegung</a></li>
-                <li class="nav-dropdown__link" role="none"><a href="#projects" role="menuitem">Komplettsanierung</a></li>
-                <li class="nav-dropdown__link" role="none"><a href="#projects" role="menuitem">Oberflächen &amp; Innenausbau</a></li>
-                <li class="nav-dropdown__link" role="none"><a href="#projects" role="menuitem">Licht &amp; Öffnungen</a></li>
+                <li class="nav-dropdown__link" role="none"><a href="leistungen/badrenovierung/" role="menuitem">Badrenovierung</a></li>
+                <li class="nav-dropdown__link" role="none"><a href="leistungen/bodenarbeiten/" role="menuitem">Bodenverlegung</a></li>
+                <li class="nav-dropdown__link" role="none"><a href="leistungen/komplettsanierung/" role="menuitem">Komplettsanierung</a></li>
+                <li class="nav-dropdown__link" role="none"><a href="leistungen/innenausbau/" role="menuitem">Oberflächen &amp; Innenausbau</a></li>
+                <li class="nav-dropdown__link" role="none"><a href="leistungen/fenster-tueren/" role="menuitem">Licht &amp; Öffnungen</a></li>
               </ul>
             </li>
             <li class="navbar__item">
@@ -637,6 +649,9 @@
           <button class="gallery__filter" data-filter="maler">
             <div class="gallery__filter-label"><span>Maler</span></div>
           </button>
+          <button class="gallery__filter" data-filter="badrenovierung">
+            <div class="gallery__filter-label"><span>Badrenovierung</span></div>
+          </button>
           <button class="gallery__filter" data-filter="aussen">
             <div class="gallery__filter-label"><span>Außen</span></div>
           </button>
@@ -664,77 +679,67 @@
           To reorder: move the gallery__item divs. To add: duplicate an item, update src/alt/data-category/data-size.
         -->
         <div class="gallery__grid" id="gallery-grid">
-          <!-- 1 — Sanierung (wide) -->
-          <div class="gallery__item gallery__item--wide" data-category="sanierung" data-size="wide">
+          <div class="gallery__item gallery__item--wide" data-category="boden" data-size="wide">
             <a href="assets/images/gallery-01.jpeg" class="glightbox" data-type="image">
-              <img src="assets/images/gallery-01.jpeg" alt="Renovierungsarbeiten" loading="lazy">
-            </a>
-            <div class="gallery__tag-cover">
-              <span class="gallery__tag">Sanierung</span>
-            </div>
-          </div>
-          <!-- 2 — Fliesen -->
-          <div class="gallery__item" data-category="fliesen" data-size="default">
-            <a href="assets/images/gallery-02.jpeg" class="glightbox" data-type="image">
-              <img src="assets/images/gallery-02.jpeg" alt="Fliesenarbeiten" loading="lazy">
-            </a>
-            <div class="gallery__tag-cover">
-              <span class="gallery__tag">Fliesen</span>
-            </div>
-          </div>
-          <!-- 3 — Boden -->
-          <div class="gallery__item" data-category="boden" data-size="default">
-            <a href="assets/images/gallery-03.jpeg" class="glightbox" data-type="image">
-              <img src="assets/images/gallery-03.jpeg" alt="Bodenverlegung" loading="lazy">
+              <img src="assets/images/gallery-01.jpeg" alt="Boden" loading="lazy">
             </a>
             <div class="gallery__tag-cover">
               <span class="gallery__tag">Boden</span>
             </div>
           </div>
-          <!-- 4 — Maler -->
-          <div class="gallery__item" data-category="maler" data-size="default">
-            <a href="assets/images/gallery-04.jpeg" class="glightbox" data-type="image">
-              <img src="assets/images/gallery-04.jpeg" alt="Malerarbeiten" loading="lazy">
-            </a>
-            <div class="gallery__tag-cover">
-              <span class="gallery__tag">Maler</span>
-            </div>
-          </div>
-          <!-- 5 — Außen -->
-          <div class="gallery__item" data-category="aussen" data-size="default">
-            <a href="assets/images/gallery-05.jpeg" class="glightbox" data-type="image">
-              <img src="assets/images/gallery-05.jpeg" alt="Außenarbeiten" loading="lazy">
-            </a>
-            <div class="gallery__tag-cover">
-              <span class="gallery__tag">Außen</span>
-            </div>
-          </div>
-          <!-- 6 — Sanierung (wide) -->
-          <div class="gallery__item" data-category="sanierung" data-size="default">
-            <a href="assets/images/gallery-06.jpeg" class="glightbox" data-type="image">
-              <img src="assets/images/gallery-06.jpeg" alt="Sanierungsprojekt" loading="lazy">
-            </a>
-            <div class="gallery__tag-cover">
-              <span class="gallery__tag">Sanierung</span>
-            </div>
-          </div>
-          <!-- 7 — Fliesen -->
-          <div class="gallery__item gallery__item--wide" data-category="fliesen" data-size="wide">
-            <a href="assets/images/gallery-07.jpeg" class="glightbox" data-type="image">
-              <img src="assets/images/gallery-07.jpeg" alt="Fliesenarbeiten" loading="lazy">
+          <div class="gallery__item" data-category="fliesen" data-size="default">
+            <a href="assets/images/gallery-02.jpeg" class="glightbox" data-type="image">
+              <img src="assets/images/gallery-02.jpeg" alt="Fliesen" loading="lazy">
             </a>
             <div class="gallery__tag-cover">
               <span class="gallery__tag">Fliesen</span>
             </div>
           </div>
-        </div>
+          <div class="gallery__item" data-category="badrenovierung" data-size="default">
+            <a href="assets/images/gallery-03.jpeg" class="glightbox" data-type="image">
+              <img src="assets/images/gallery-03.jpeg" alt="Badrenovierung" loading="lazy">
+            </a>
+            <div class="gallery__tag-cover">
+              <span class="gallery__tag">Badrenovierung</span>
+            </div>
+          </div>
+          <div class="gallery__item" data-category="boden" data-size="default">
+            <a href="assets/images/gallery-04.jpeg" class="glightbox" data-type="image">
+              <img src="assets/images/gallery-04.jpeg" alt="Boden" loading="lazy">
+            </a>
+            <div class="gallery__tag-cover">
+              <span class="gallery__tag">Boden</span>
+            </div>
+          </div>
+          <div class="gallery__item" data-category="maler"><a href="assets/images/gallery-33.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-33.jpeg" alt="Maler" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Maler</span></div></div>          <div class="gallery__item" data-category="aussen" data-size="default">
+            <a href="assets/images/gallery-06.jpeg" class="glightbox" data-type="image">
+              <img src="assets/images/gallery-06.jpeg" alt="Außen" loading="lazy">
+            </a>
+            <div class="gallery__tag-cover">
+              <span class="gallery__tag">Außen</span>
+            </div>
+          </div>
+          <div class="gallery__item gallery__item--wide" data-category="boden" data-size="wide">
+            <a href="assets/images/gallery-07.jpeg" class="glightbox" data-type="image">
+              <img src="assets/images/gallery-07.jpeg" alt="Boden" loading="lazy">
+            </a>
+            <div class="gallery__tag-cover">
+              <span class="gallery__tag">Boden</span>
+            </div>
+          </div>
+          <!-- Items 8–76: hidden by default, visible via filter or full lightbox -->
+          <div class="gallery__item" data-category="badrenovierung" hidden><a href="assets/images/gallery-08.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-08.jpeg" alt="Badrenovierung" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Badrenovierung</span></div></div>          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-09.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-09.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>          <div class="gallery__item" data-category="boden" hidden><a href="assets/images/gallery-10.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-10.jpeg" alt="Boden" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Boden</span></div></div>          <div class="gallery__item" data-category="boden" hidden><a href="assets/images/gallery-19.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-19.jpeg" alt="Boden" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Boden</span></div></div>          <div class="gallery__item" data-category="sanierung" hidden><a href="assets/images/gallery-20.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-20.jpeg" alt="Sanierung" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Sanierung</span></div></div>          <div class="gallery__item" data-category="aussen" hidden><a href="assets/images/gallery-21.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-21.jpeg" alt="Außen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Außen</span></div></div>          <div class="gallery__item" data-category="maler" hidden><a href="assets/images/gallery-22.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-22.jpeg" alt="Maler" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Maler</span></div></div>          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-23.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-23.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>          <div class="gallery__item" data-category="maler" hidden><a href="assets/images/gallery-24.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-24.jpeg" alt="Maler" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Maler</span></div></div>          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-25.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-25.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>          <div class="gallery__item" data-category="boden" hidden><a href="assets/images/gallery-30.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-30.jpeg" alt="Boden" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Boden</span></div></div>          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-31.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-31.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-32.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-32.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>           <div class="gallery__item" data-category="aussen" data-size="default" hidden>
+            <a href="assets/images/gallery-05.jpeg" class="glightbox" data-type="image">
+              <img src="assets/images/gallery-05.jpeg" alt="Außenarbeiten" loading="lazy">
+            </a>
+            <div class="gallery__tag-cover">
+              <span class="gallery__tag">Badrenovierung</span>
+            </div>
+          </div>
+          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-34.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-34.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>          <div class="gallery__item" data-category="maler" hidden><a href="assets/images/gallery-35.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-35.jpeg" alt="Maler" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Maler</span></div></div>          <div class="gallery__item" data-category="aussen" hidden><a href="assets/images/gallery-36.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-36.jpeg" alt="Außen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Außen</span></div></div>          <div class="gallery__item" data-category="aussen" hidden><a href="assets/images/gallery-37.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-37.jpeg" alt="Außen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Außen</span></div></div>          <div class="gallery__item" data-category="aussen" hidden><a href="assets/images/gallery-38.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-38.jpeg" alt="Außen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Außen</span></div></div>          <div class="gallery__item" data-category="aussen" hidden><a href="assets/images/gallery-39.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-39.jpeg" alt="Außen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Außen</span></div></div>          <div class="gallery__item" data-category="sanierung" hidden><a href="assets/images/gallery-40.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-40.jpeg" alt="Sanierung" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Sanierung</span></div></div>          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-41.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-41.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>          <div class="gallery__item" data-category="badrenovierung" hidden><a href="assets/images/gallery-42.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-42.jpeg" alt="Badrenovierung" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Badrenovierung</span></div></div>          <div class="gallery__item" data-category="badrenovierung" hidden><a href="assets/images/gallery-43.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-43.jpeg" alt="Badrenovierung" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Badrenovierung</span></div></div>          <div class="gallery__item" data-category="badrenovierung" hidden><a href="assets/images/gallery-44.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-44.jpeg" alt="Badrenovierung" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Badrenovierung</span></div></div>          <div class="gallery__item" data-category="badrenovierung" hidden><a href="assets/images/gallery-45.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-45.jpeg" alt="Badrenovierung" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Badrenovierung</span></div></div>          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-46.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-46.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>          <div class="gallery__item" data-category="aussen" hidden><a href="assets/images/gallery-47.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-47.jpeg" alt="Außen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Außen</span></div></div>          <div class="gallery__item" data-category="sanierung" hidden><a href="assets/images/gallery-48.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-48.jpeg" alt="Sanierung" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Sanierung</span></div></div>          <div class="gallery__item" data-category="maler" hidden><a href="assets/images/gallery-49.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-49.jpeg" alt="Maler" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Maler</span></div></div>          <div class="gallery__item" data-category="maler" hidden><a href="assets/images/gallery-50.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-50.jpeg" alt="Maler" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Maler</span></div></div>          <div class="gallery__item" data-category="maler" hidden><a href="assets/images/gallery-51.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-51.jpeg" alt="Maler" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Maler</span></div></div>          <div class="gallery__item" data-category="badrenovierung" hidden><a href="assets/images/gallery-52.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-52.jpeg" alt="Badrenovierung" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Badrenovierung</span></div></div>          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-53.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-53.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>          <div class="gallery__item" data-category="boden" hidden><a href="assets/images/gallery-54.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-54.jpeg" alt="Boden" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Boden</span></div></div>          <div class="gallery__item" data-category="boden" hidden><a href="assets/images/gallery-55.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-55.jpeg" alt="Boden" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Boden</span></div></div>          <div class="gallery__item" data-category="maler" hidden><a href="assets/images/gallery-56.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-56.jpeg" alt="Maler" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Maler</span></div></div>          <div class="gallery__item" data-category="maler" hidden><a href="assets/images/gallery-57.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-57.jpeg" alt="Maler" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Maler</span></div></div>          <div class="gallery__item" data-category="sanierung" hidden><a href="assets/images/gallery-58.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-58.jpeg" alt="Sanierung" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Sanierung</span></div></div>          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-59.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-59.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-60.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-60.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>          <div class="gallery__item" data-category="boden" hidden><a href="assets/images/gallery-61.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-61.jpeg" alt="Boden" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Boden</span></div></div>          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-62.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-62.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>          <div class="gallery__item" data-category="badrenovierung" hidden><a href="assets/images/gallery-63.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-63.jpeg" alt="Badrenovierung" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Badrenovierung</span></div></div>          <div class="gallery__item" data-category="badrenovierung" hidden><a href="assets/images/gallery-64.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-64.jpeg" alt="Badrenovierung" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Badrenovierung</span></div></div>          <div class="gallery__item" data-category="aussen" hidden><a href="assets/images/gallery-65.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-65.jpeg" alt="Außen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Außen</span></div></div>          <div class="gallery__item" data-category="badrenovierung" hidden><a href="assets/images/gallery-66.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-66.jpeg" alt="Badrenovierung" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Badrenovierung</span></div></div>          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-67.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-67.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>          <div class="gallery__item" data-category="maler" hidden><a href="assets/images/gallery-68.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-68.jpeg" alt="Maler" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Maler</span></div></div>          <div class="gallery__item" data-category="aussen" hidden><a href="assets/images/gallery-69.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-69.jpeg" alt="Außen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Außen</span></div></div>          <div class="gallery__item" data-category="aussen" hidden><a href="assets/images/gallery-70.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-70.jpeg" alt="Außen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Außen</span></div></div>          <div class="gallery__item" data-category="aussen" hidden><a href="assets/images/gallery-71.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-71.jpeg" alt="Außen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Außen</span></div></div>          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-72.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-72.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>          <div class="gallery__item" data-category="boden" hidden><a href="assets/images/gallery-73.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-73.jpeg" alt="Boden" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Boden</span></div></div>          <div class="gallery__item" data-category="boden" hidden><a href="assets/images/gallery-74.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-74.jpeg" alt="Boden" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Boden</span></div></div>          <div class="gallery__item" data-category="boden" hidden><a href="assets/images/gallery-75.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-75.jpeg" alt="Boden" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Boden</span></div></div>          <div class="gallery__item" data-category="boden" hidden><a href="assets/images/gallery-76.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-76.jpeg" alt="Boden" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Boden</span></div></div>          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-77.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-77.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>          <div class="gallery__item" data-category="badrenovierung" hidden><a href="assets/images/gallery-78.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-78.jpeg" alt="Badrenovierung" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Badrenovierung</span></div></div>          <div class="gallery__item" data-category="sanierung" hidden><a href="assets/images/gallery-79.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-79.jpeg" alt="Sanierung" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Sanierung</span></div></div>          <div class="gallery__item" data-category="maler" hidden><a href="assets/images/gallery-80.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-80.jpeg" alt="Maler" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Maler</span></div></div>          <div class="gallery__item" data-category="boden" hidden><a href="assets/images/gallery-81.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-81.jpeg" alt="Boden" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Boden</span></div></div>          <div class="gallery__item" data-category="maler" hidden><a href="assets/images/gallery-82.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-82.jpeg" alt="Maler" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Maler</span></div></div>          <div class="gallery__item" data-category="fliesen" hidden><a href="assets/images/gallery-84.jpeg" class="glightbox" data-type="image"><img src="assets/images/gallery-84.jpeg" alt="Fliesen" loading="lazy"></a><div class="gallery__tag-cover"><span class="gallery__tag">Fliesen</span></div></div>        </div>
 
-        <!-- Extra images (not in the grid; loaded into the full-gallery lightbox only) -->
-        <div id="gallery-extra" hidden>
-          <a href="assets/images/gallery-08.jpeg" data-type="image"></a>
-          <a href="assets/images/gallery-09.jpeg" data-type="image"></a>
-          <a href="assets/images/gallery-10.jpeg" data-type="image"></a>
-        </div>
+        <!-- gallery-extra is unused — all images live in the grid above -->
+        <div id="gallery-extra" hidden></div>
 
         <!-- Footer: "view all" left, CTA right -->
         <div class="gallery__footer">
@@ -899,67 +904,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== SERVICE AREAS ===== -->
-    <section class="areas" id="areas">
-      <div class="container areas__container">
-        <div class="areas__content">
-          <div class="areas__text">
-            <div class="areas__eyebrow-cover">
-              <span class="eyebrow">Wo wir arbeiten</span>
-            </div>
-            <div class="areas__heading-cover">
-              <h2>Unsere Einsatzgebiete</h2>
-            </div>
-            <div class="areas__desc-cover">
-              <p>Wir sind in weiten Teilen von Mecklenburg-Vorpommern sowie in Berlin für Sie im Einsatz. Für größere Projekte fahren wir nach Absprache gerne weiter.</p>
-            </div>
-          </div>
-
-        </div>
-
-        <ul class="areas__locations">
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Neubrandenburg</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Berlin</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Rostock</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Stralsund</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Greifswald</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Schwerin</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Neustrelitz</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Waren (Müritz)</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Güstrow</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Demmin</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Stavenhagen</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Pasewalk</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Anklam</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Prenzlau</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Eberswalde</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Malchow</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Teterow</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Altentreptow</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Penzlin</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Woldegk</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Ueckermünde</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Röbel (Müritz)</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Usedom</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Friedland</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Templin</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Angermünde</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Neuruppin</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Fürstenberg/Havel</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Lychen</span></li>
-          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Oranienburg</span></li>
-        </ul>
-        <div class="areas__expand-cover">
-          <button class="areas__expand-btn" id="areas-expand-btn" aria-expanded="false">
-            <div class="btn__label"><span>Alle Städte anzeigen</span></div>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M8 3v10M3 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
         </div>
       </div>
     </section>
@@ -1241,6 +1185,31 @@
                 </div>
                 <div class="form-group">
                   <div class="form-group__label-cover">
+                    <label for="contact-service">Gewünschte Leistung</label>
+                  </div>
+                  <div class="form-group__input-cover">
+                    <div class="form-select" id="service-select">
+                      <button type="button" class="form-select__trigger" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="form-select__value form-select__value--placeholder">Bitte wählen...</span>
+                        <svg class="form-select__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                          <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </button>
+                      <ul class="form-select__menu" role="listbox">
+                        <li class="form-select__option" role="option" data-value="sanierung">Sanierung</li>
+                        <li class="form-select__option" role="option" data-value="fliesen">Fliesenarbeiten</li>
+                        <li class="form-select__option" role="option" data-value="boden">Bodenbeläge</li>
+                        <li class="form-select__option" role="option" data-value="maler">Malerarbeiten</li>
+                        <li class="form-select__option" role="option" data-value="badrenovierung">Badrenovierung</li>
+                        <li class="form-select__option" role="option" data-value="aussen">Außenarbeiten</li>
+                        <li class="form-select__option" role="option" data-value="other">Sonstiges</li>
+                      </ul>
+                      <input type="hidden" name="service" id="contact-service" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-group__label-cover">
                     <label for="contact-message">Nachricht</label>
                   </div>
                   <div class="form-group__input-cover">
@@ -1259,6 +1228,67 @@
       </div>
     </section>
 
+    <!-- ===== SERVICE AREAS ===== -->
+    <section class="areas" id="areas">
+      <div class="container areas__container">
+        <div class="areas__content">
+          <div class="areas__text">
+            <div class="areas__eyebrow-cover">
+              <span class="eyebrow">Wo wir arbeiten</span>
+            </div>
+            <div class="areas__heading-cover">
+              <h2>Unsere Einsatzgebiete</h2>
+            </div>
+            <div class="areas__desc-cover">
+              <p>Wir sind in weiten Teilen von Mecklenburg-Vorpommern sowie in Berlin für Sie im Einsatz. Für größere Projekte fahren wir nach Absprache gerne weiter.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <ul class="areas__locations">
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Neubrandenburg</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Berlin</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Rostock</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Stralsund</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Greifswald</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Schwerin</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Neustrelitz</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Waren (Müritz)</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Güstrow</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Demmin</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Stavenhagen</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Pasewalk</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Anklam</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Prenzlau</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Eberswalde</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Malchow</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Teterow</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Altentreptow</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Penzlin</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Woldegk</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Ueckermünde</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Röbel (Müritz)</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Usedom</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Friedland</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Templin</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Angermünde</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Neuruppin</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Fürstenberg/Havel</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Lychen</span></li>
+          <li class="areas__city"><svg class="areas__pin" width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true"><path d="M14 8c0 5-6 10-6 10S2 13 2 8a6 6 0 1 1 12 0Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg><span>Oranienburg</span></li>
+        </ul>
+        <div class="areas__expand-cover">
+          <button class="areas__expand-btn" id="areas-expand-btn" aria-expanded="false">
+            <div class="btn__label"><span>Alle Städte anzeigen</span></div>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M8 3v10M3 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ===== FOOTER ===== -->
@@ -1270,7 +1300,7 @@
             <img src="assets/images/logo-white.png" alt="AkkermanStroy" class="footer__logo-img">
           </div>
           <div class="footer__brand-desc-cover">
-            <p>Engineering beauty in every space we touch. Your partner for elite structural renovations.</p>
+            <p>Handwerkskunst, die Räume verwandelt. Ihr Partner für hochwertige Bau- und Renovierungsarbeiten.</p>
           </div>
           <div class="footer__social">
             <a href="#" class="footer__social-link" aria-label="Facebook">
@@ -1291,22 +1321,24 @@
         <div class="footer__links-grid">
           <div class="footer__col">
             <div class="footer__col-title-cover">
-              <h4>Services</h4>
+              <h4>Leistungen</h4>
             </div>
             <ul class="footer__links">
-              <li><div class="footer__link-cover"><a href="#services">Tiling</a></div></li>
-              <li><div class="footer__link-cover"><a href="#services">Flooring</a></div></li>
-              <li><div class="footer__link-cover"><a href="#services">Wall Systems</a></div></li>
+              <li><div class="footer__link-cover"><a href="leistungen/badrenovierung/">Badrenovierung komplett</a></div></li>
+              <li><div class="footer__link-cover"><a href="leistungen/bodenarbeiten/">Bodenarbeiten</a></div></li>
+              <li><div class="footer__link-cover"><a href="leistungen/innenausbau/">Oberflächen &amp; Innenausbau</a></div></li>
+              <li><div class="footer__link-cover"><a href="leistungen/fenster-tueren/">Licht &amp; Öffnungen</a></div></li>
+              <li><div class="footer__link-cover"><a href="leistungen/komplettsanierung/">Komplettsanierung</a></div></li>
             </ul>
           </div>
 
           <div class="footer__col">
             <div class="footer__col-title-cover">
-              <h4>Company</h4>
+              <h4>Unternehmen</h4>
             </div>
             <ul class="footer__links">
-              <li><div class="footer__link-cover"><a href="#contact">Contact Us</a></div></li>
-              <li><div class="footer__link-cover"><a href="#">Privacy Policy</a></div></li>
+              <li><div class="footer__link-cover"><a href="#contact">Kontakt</a></div></li>
+              <li><div class="footer__link-cover"><a href="#">Datenschutz</a></div></li>
             </ul>
           </div>
         </div>

@@ -196,6 +196,53 @@
     }
   }
 
+  /* --- Custom form select (mirrors nav-dropdown behaviour) --- */
+  function initFormSelect() {
+    var wrapper = document.getElementById('service-select');
+    if (!wrapper) return;
+
+    var trigger = wrapper.querySelector('.form-select__trigger');
+    var menu    = wrapper.querySelector('.form-select__menu');
+    var valueEl = wrapper.querySelector('.form-select__value');
+    var hidden  = wrapper.querySelector('input[type="hidden"]');
+    var options = wrapper.querySelectorAll('.form-select__option');
+
+    function open() {
+      menu.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+
+    function close() {
+      menu.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    trigger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = menu.classList.contains('open');
+      if (isOpen) { close(); } else { open(); }
+    });
+
+    options.forEach(function (opt) {
+      opt.addEventListener('click', function () {
+        options.forEach(function (o) { o.removeAttribute('aria-selected'); });
+        opt.setAttribute('aria-selected', 'true');
+        valueEl.textContent = opt.textContent;
+        valueEl.classList.remove('form-select__value--placeholder');
+        hidden.value = opt.getAttribute('data-value');
+        close();
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!wrapper.contains(e.target)) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
+    });
+  }
+
   /* --- Smooth scroll for all anchor links --- */
   function initSmoothScroll() {
     var anchors = document.querySelectorAll('a[href^="#"]');
@@ -281,11 +328,13 @@
     var items = Array.prototype.slice.call(
       document.querySelectorAll('#gallery-grid .gallery__item')
     );
+    var slideRealIdx = 0;
     items.forEach(function (item) {
       var src = item.querySelector('img');
       if (!src) return;
       var slide = document.createElement('div');
       slide.className = 'gallery__slide';
+      slide.setAttribute('data-real-idx', slideRealIdx++);
       var img = document.createElement('img');
       img.src = src.src;
       img.alt = src.alt;
@@ -326,17 +375,26 @@
       sliderGoTo(sliderCurrent + 1, true);
     });
 
-    /* Swipe */
+    /* Swipe + tap-to-open */
     var touchStartX = 0;
+    var touchMoved  = false;
     sliderViewport.addEventListener('touchstart', function (e) {
       touchStartX = e.touches[0].clientX;
+      touchMoved  = false;
     }, { passive: true });
     sliderViewport.addEventListener('touchend', function (e) {
       var dx = e.changedTouches[0].clientX - touchStartX;
       if (Math.abs(dx) > 40) {
+        touchMoved = true;
         sliderGoTo(sliderCurrent + (dx < 0 ? 1 : -1), true);
       }
     }, { passive: true });
+    sliderViewport.addEventListener('click', function (e) {
+      if (touchMoved) { touchMoved = false; return; }
+      var slide = e.target.closest('.gallery__slide');
+      if (!slide || !slide.hasAttribute('data-real-idx')) return;
+      openAllImagesLightbox(parseInt(slide.getAttribute('data-real-idx'), 10));
+    });
 
     /* Recalculate widths and position on resize */
     window.addEventListener('resize', function () {
@@ -386,7 +444,7 @@
   /* --- "View all" lightbox — all 10 images including the hidden extras --- */
   var allImagesLightbox = null;
 
-  function openAllImagesLightbox() {
+  function openAllImagesLightbox(startIdx) {
     if (!allImagesLightbox) {
       var slides = [];
 
@@ -410,7 +468,11 @@
       });
     }
 
-    allImagesLightbox.open();
+    if (typeof startIdx === 'number') {
+      allImagesLightbox.openAt(startIdx);
+    } else {
+      allImagesLightbox.open();
+    }
   }
 
   function initGallery() {
@@ -421,12 +483,15 @@
       viewAllBtn.addEventListener('click', openAllImagesLightbox);
     }
 
+    /* Clicking any visible grid image opens the full-gallery lightbox so the
+       user can arrow through every photo, not only the 7 currently shown. */
     galleryGrid.addEventListener('click', function (e) {
       var link = e.target.closest('a.glightbox');
-      if (!link || !lightbox) return;
+      if (!link) return;
       e.preventDefault();
-      var idx = visibleGalleryLinks.indexOf(link);
-      if (idx !== -1) lightbox.openAt(idx);
+      var allLinks = Array.prototype.slice.call(galleryGrid.querySelectorAll('a.glightbox'));
+      var idx = allLinks.indexOf(link);
+      openAllImagesLightbox(idx >= 0 ? idx : 0);
     });
 
     rebuildLightbox();
@@ -441,12 +506,20 @@
         filterBtns.forEach(function (b) { b.classList.remove('gallery__filter--active'); });
         btn.classList.add('gallery__filter--active');
 
+        /* Show only the first 7 items matching the filter — the rest stay
+           hidden but remain accessible via the full-gallery lightbox. */
         var filterValue = btn.getAttribute('data-filter');
+        var shown = 0;
         Array.prototype.forEach.call(
           galleryGrid.querySelectorAll('.gallery__item'),
           function (item) {
             var match = filterValue === '*' || item.getAttribute('data-category') === filterValue;
-            item.hidden = !match;
+            if (match && shown < 7) {
+              item.hidden = false;
+              shown++;
+            } else {
+              item.hidden = true;
+            }
           }
         );
 
@@ -878,16 +951,10 @@
   }
 
   /* --- Process section scroll-driven animation (Apple-style sticky) ---
-     .process-pin is a tall container; .process is position:sticky inside it.
-     JS drives opacity + translateY on each step via scroll progress.
-
-     Cleanup strategy (no scroll compensation, no jump):
-     After the animation finishes, wait until the section has scrolled
-     completely off-screen above the viewport, then collapse the pin.
-     The browser's scroll anchoring (overflow-anchor:auto — on by default
-     in all modern browsers) automatically adjusts scrollY to keep the
-     visible content stationary. Also sets top:-9999px to prevent the
-     sticky from re-engaging when the user scrolls back up. */
+     DISABLED: commented out in favour of initProcessScrollReveal below.
+     To re-enable: uncomment this block and swap the initProcessScrollReveal
+     call for initProcessAnimation in init(). Also remove the .is-visible CSS
+     rule and the CSS transition on .process__step.
   function initProcessAnimation() {
     var steps   = document.querySelectorAll('.process__step');
     var section = document.querySelector('.process');
@@ -904,9 +971,6 @@
 
     function setup() {
       if (done) return;
-      /* No breathing room beyond what the animation needs. The section
-         un-sticks ~space-section px after the last step finishes, so the
-         sticky lock ends almost immediately after the animation. */
       pin.style.height = (section.offsetHeight + steps.length * RANGE_PX) + 'px';
     }
 
@@ -918,13 +982,6 @@
         step.style.transform = 'translateY(0)';
       });
 
-      /* Wait until the section is fully off-screen above the viewport, then
-         collapse the pin and permanently disable sticky. This is the earliest
-         moment the two DOM mutations are invisible (section not rendered), so
-         scroll anchoring can silently rebase scrollY with zero visible change.
-         Firing any earlier (while section is still visible) causes a violent
-         jump because the 1200px position difference between sticky and natural
-         flow becomes visible before anchoring can compensate. */
       var io = new IntersectionObserver(function (entries) {
         var entry = entries[0];
         if (entry.isIntersecting) return;
@@ -952,6 +1009,28 @@
     window.addEventListener('resize', function () { if (!done) setup(); }, { passive: true });
     onScroll();
   }
+  */
+
+  /* --- Process section scroll-reveal ---
+     Each step fades in and slides up via CSS transition when it enters
+     the viewport. Replaces the sticky scroll-driven animation above. */
+  function initProcessScrollReveal() {
+    var steps = document.querySelectorAll('.process__step');
+    if (!steps.length) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.2 });
+
+    steps.forEach(function (step, i) {
+      step.style.transitionDelay = (i * 0.12) + 's';
+      observer.observe(step);
+    });
+  }
 
   /* --- Init --- */
   function init() {
@@ -974,12 +1053,14 @@
     initAccordion();
     initSmoothScroll();
     initNavDropdown();
+    initFormSelect();
     initGallery();
     initGalleryFilters();
     initReviews();
     initStatsTicker();
     initStatsCountUp();
-    initProcessAnimation();
+    // initProcessAnimation(); /* DISABLED — use initProcessScrollReveal instead */
+    initProcessScrollReveal();
     initAreasExpand();
 
     document.addEventListener('click', handleOutsideClick);

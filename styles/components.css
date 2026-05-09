@@ -257,8 +257,13 @@
   position: relative;
   opacity: 0;
   transform: translateY(2rem);
-  /* opacity and transform are driven directly by scroll progress in JS */
+  transition: opacity 0.55s ease, transform 0.55s ease;
   will-change: opacity, transform;
+}
+
+.process__step.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .process__step-content {
@@ -535,8 +540,106 @@
   border-color: var(--color-primary);
 }
 
+/* --- Custom form select (mirrors nav-dropdown) --- */
+.form-select {
+  position: relative;
+}
+
+.form-select__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius-btn);
+  font-family: var(--font-body);
+  font-size: var(--text-p3);
+  color: var(--color-text-heading);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--ease-default);
+}
+
+.form-select__trigger[aria-expanded="true"] {
+  border-color: var(--color-primary);
+}
+
+.form-select__value--placeholder {
+  color: var(--color-placeholder);
+}
+
+.form-select__chevron {
+  flex-shrink: 0;
+  color: var(--color-nav-link);
+  transition: transform 0.3s ease;
+}
+
+.form-select__trigger[aria-expanded="true"] .form-select__chevron {
+  transform: rotate(180deg);
+}
+
+.form-select__menu {
+  position: absolute;
+  top: calc(100% + 0.375rem);
+  left: 0;
+  right: 0;
+  background-color: var(--color-surface);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--color-border);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 200;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-0.375rem);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.form-select__menu.open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s;
+}
+
+.form-select__option {
+  padding: 0.875rem var(--space-lg);
+  font-family: var(--font-heading);
+  font-size: var(--text-p3);
+  font-weight: var(--weight-semibold);
+  color: var(--color-nav-link);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.form-select__option:last-child {
+  border-bottom: none;
+}
+
+.form-select__option:hover,
+.form-select__option[aria-selected="true"] {
+  background-color: var(--color-surface-alt);
+  color: var(--color-text-heading);
+}
+
+.form-select__option:first-child {
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.form-select__option:last-child {
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
 .form-group__input-cover textarea {
-  resize: vertical;
+  resize: none;
   min-height: 11.25rem;
 }
 
@@ -661,4 +764,25 @@ a.contact__info-value:hover {
 
 .footer__links a:hover {
   color: var(--color-text-white);
+}
+
+/* --- GLightbox arrow overrides (mobile only, ≤ 768px) ---
+   Library hides arrows below 769px (top:-100%); restore and restyle. */
+@media (max-width: 48rem) {
+  .glightbox-clean .gprev,
+  .glightbox-clean .gnext {
+    top: 45%;
+    width: 2.1875rem;
+    height: 2.1875rem;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .glightbox-clean .gprev { left: 0.625rem; }
+  .glightbox-clean .gnext { right: 0.625rem; }
+
+  .glightbox-clean .gprev svg,
+  .glightbox-clean .gnext svg {
+    width: 0.9375rem;
+    height: auto;
+  }
 }
