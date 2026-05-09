@@ -5,7 +5,8 @@
 /* ---- Tablet Landscape: ≤ 64rem (1024px) ---- */
 @media (max-width: 64rem) {
 
-  h2 {
+  h2,
+  .legal__heading-cover h1 {
     font-size: 2.5rem;
   }
 
@@ -80,7 +81,8 @@
 /* ---- Tablet Portrait: ≤ 48rem (768px) ---- */
 @media (max-width: 48rem) {
 
-  h2 {
+  h2,
+  .legal__heading-cover h1 {
     font-size: 2rem;
   }
 
@@ -363,7 +365,8 @@
     padding-bottom: 7.5rem;
   }
 
-  h2 {
+  h2,
+  .legal__heading-cover h1 {
     font-size: 1.75rem;
   }
 

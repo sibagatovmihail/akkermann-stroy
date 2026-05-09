@@ -56,6 +56,18 @@
   margin: 0;
 }
 
+.cc-link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  font-weight: var(--weight-semibold);
+  transition: color 0.2s ease;
+}
+
+.cc-link:hover {
+  color: var(--color-accent);
+}
+
 .cc-actions {
   display: flex;
   align-items: center;

@@ -289,7 +289,9 @@
             <div class="contact__form-title-cover">
               <h3>Schreiben Sie uns</h3>
             </div>
-            <form class="contact__form" id="contact-form" action="#" method="POST">
+            <form class="contact__form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+              <input type="hidden" name="access_key" value="210909cf-9060-4e75-a917-a8921dc36f40">
+              <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
               <div class="contact__form-fields">
                 <div class="contact__form-row">
                   <div class="form-group">
@@ -444,12 +446,31 @@
       <div class="footer__bottom">
         <div class="footer__copyright-cover"><p>&copy; 2026 Akkermann Stroy. Ynneavias Media</p></div>
         <div class="footer__legal">
-          <div class="footer__legal-link-cover"><a href="#">Impressum</a></div>
-          <div class="footer__legal-link-cover"><a href="#">Datenschutzerklärung</a></div>
+          <div class="footer__legal-link-cover"><a href="impressum.html">Impressum</a></div>
+          <div class="footer__legal-link-cover"><a href="datenschutzerklaerung.html">Datenschutzerklärung</a></div>
         </div>
       </div>
     </div>
   </footer>
+
+  
+  <!-- Form success popup -->
+  <div class="form-success-overlay" id="form-success-overlay" aria-hidden="true">
+    <div class="form-success-modal" role="dialog" aria-modal="true" aria-labelledby="form-success-title">
+      <div class="form-success-modal__icon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="24" cy="24" r="24" fill="#1a8a3a" fill-opacity="0.12"/>
+          <circle cx="24" cy="24" r="18" fill="#1a8a3a"/>
+          <path d="M15 24l6.5 6.5L33 18" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div><h3 class="form-success-modal__title" id="form-success-title">Anfrage gesendet!</h3></div>
+      <div><p class="form-success-modal__msg">Vielen Dank — wir melden uns in Kürze bei Ihnen.</p></div>
+      <div>
+        <button class="form-success-modal__close" id="form-success-close" type="button">Verstanden</button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/main.js"></script>
   <script src="js/cookie-consent.js"></script>

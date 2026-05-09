@@ -109,28 +109,83 @@
     }
   }
 
-  /* --- Form handling --- */
+  /* --- Form handling — Web3Forms AJAX submit --- */
+  function resetServiceSelect() {
+    var wrapper = document.getElementById('service-select');
+    if (!wrapper) return;
+    var valueEl = wrapper.querySelector('.form-select__value');
+    var hidden  = wrapper.querySelector('input[type="hidden"]');
+    var options = wrapper.querySelectorAll('.form-select__option');
+    if (valueEl) {
+      valueEl.textContent = 'Bitte wählen...';
+      valueEl.classList.add('form-select__value--placeholder');
+    }
+    if (hidden) hidden.value = '';
+    options.forEach(function (o) { o.removeAttribute('aria-selected'); });
+  }
+
+  function showSuccessModal() {
+    var overlay = document.getElementById('form-success-overlay');
+    if (!overlay) return;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+  }
+
   function handleFormSubmit(e) {
     e.preventDefault();
 
-    var name = document.getElementById('contact-name');
-    var email = document.getElementById('contact-email');
+    var name    = document.getElementById('contact-name');
+    var email   = document.getElementById('contact-email');
     var message = document.getElementById('contact-message');
+    var service = document.getElementById('contact-service');
 
-    if (!name.value.trim() || !email.value.trim() || !message.value.trim()) {
+    if (!name.value.trim() || !email.value.trim() || !message.value.trim() || !service.value) {
       return;
     }
 
     var submitBtn = contactForm.querySelector('.contact__form-submit');
-    var originalLabel = submitBtn.querySelector('.btn__label span').textContent;
-    submitBtn.querySelector('.btn__label span').textContent = 'Gesendet!';
+    var label     = submitBtn.querySelector('.btn__label span');
+    var original  = label.textContent;
+    label.textContent = 'Wird gesendet...';
     submitBtn.disabled = true;
 
-    setTimeout(function () {
-      submitBtn.querySelector('.btn__label span').textContent = originalLabel;
-      submitBtn.disabled = false;
-      contactForm.reset();
-    }, 3000);
+    fetch(contactForm.action, {
+      method: 'POST',
+      body: new FormData(contactForm),
+      headers: { 'Accept': 'application/json' }
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data && data.success) {
+          contactForm.reset();
+          resetServiceSelect();
+          showSuccessModal();
+        }
+      })
+      .catch(function () { /* silent */ })
+      .then(function () {
+        label.textContent = original;
+        submitBtn.disabled = false;
+      });
+  }
+
+  function initSuccessModal() {
+    var overlay  = document.getElementById('form-success-overlay');
+    var closeBtn = document.getElementById('form-success-close');
+    if (!overlay) return;
+
+    function closeModal() {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+    });
   }
 
   /* --- Accordion --- */
@@ -1084,6 +1139,7 @@
     if (contactForm) {
       contactForm.addEventListener('submit', handleFormSubmit);
     }
+    initSuccessModal();
 
     handleScroll();
   }

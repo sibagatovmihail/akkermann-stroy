@@ -3,6 +3,7 @@
 
   var STORAGE_KEY = 'akk_cookie_consent';
   var GA_ID = 'G-E782S147EQ';
+  var PRIVACY_URL = 'datenschutzerklaerung.html';
 
   /* ── Consent state ─────────────────────────────────────── */
 
@@ -12,6 +13,11 @@
 
   function saveConsent(analytics) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ analytics: analytics, ts: Date.now() }));
+    if (analytics) {
+      console.log('%c[Cookie Consent] Accepted — Google Analytics will be loaded.', 'color: #f8b600; font-weight: bold;');
+    } else {
+      console.log('%c[Cookie Consent] Declined — no tracking scripts loaded.', 'color: #5a5c5c; font-weight: bold;');
+    }
   }
 
   /* ── Google Analytics loader ───────────────────────────── */
@@ -41,7 +47,7 @@
       '<div class="cc-inner">' +
         '<div class="cc-text">' +
           '<p class="cc-title">Diese Website verwendet Cookies</p>' +
-          '<p class="cc-body">Wir setzen Analyse-Cookies (Google Analytics) ein, um zu verstehen, wie Besucher unsere Website nutzen. Sie k&ouml;nnen der Nutzung zustimmen oder sie ablehnen &ndash; Ihre Auswahl wird gespeichert.</p>' +
+          '<p class="cc-body">Wir setzen technisch notwendige Cookies sowie &mdash; mit Ihrer Einwilligung &mdash; Analyse-Cookies (Google Analytics) ein, um die Nutzung unserer Website zu verstehen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO, &sect; 25 Abs. 1 TTDSG. Ihre Einwilligung ist freiwillig und jederzeit widerrufbar. Details in der <a href="' + PRIVACY_URL + '" class="cc-link">Datenschutzerkl&auml;rung</a>.</p>' +
         '</div>' +
         '<div class="cc-actions">' +
           '<button class="cc-btn cc-btn--ghost" id="cc-settings-btn">Einstellungen</button>' +
@@ -77,7 +83,7 @@
           '<div class="cc-category">' +
             '<div class="cc-category__info">' +
               '<p class="cc-category__name">Analyse (Google Analytics)</p>' +
-              '<p class="cc-category__desc">Helfen uns zu verstehen, wie Besucher mit der Website interagieren. Alle Daten werden anonymisiert erfasst.</p>' +
+              '<p class="cc-category__desc">Helfen uns zu verstehen, wie Besucher mit der Website interagieren. IP-Adressen werden anonymisiert. Anbieter: Google Ireland Ltd. Mehr in der <a href="' + PRIVACY_URL + '" class="cc-link">Datenschutzerkl&auml;rung</a>.</p>' +
             '</div>' +
             '<label class="cc-toggle" aria-label="Analyse-Cookies">' +
               '<input type="checkbox" id="cc-analytics-toggle" class="cc-toggle__input">' +
@@ -101,6 +107,8 @@
   }
 
   function showModal(banner) {
+    if (document.getElementById('cc-modal-overlay')) return;
+
     var overlay = createModal();
     document.body.appendChild(overlay);
     requestAnimationFrame(function () { overlay.classList.add('cc-modal-overlay--visible'); });
@@ -117,14 +125,14 @@
       saveConsent(allow);
       if (allow) loadGA();
       closeModal(overlay);
-      hideBanner(banner);
+      if (banner) hideBanner(banner);
     });
 
     overlay.querySelector('#cc-accept-all-btn').addEventListener('click', function () {
       saveConsent(true);
       loadGA();
       closeModal(overlay);
-      hideBanner(banner);
+      if (banner) hideBanner(banner);
     });
   }
 
@@ -162,6 +170,18 @@
       showModal(banner);
     });
   }
+
+  /* ── Public API ────────────────────────────────────────── */
+
+  window.akkCookieConsent = {
+    openSettings: function () {
+      var existingBanner = document.getElementById('cc-banner');
+      showModal(existingBanner || null);
+    },
+    revoke: function () {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    }
+  };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
