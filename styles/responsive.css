@@ -502,6 +502,10 @@
     width: 100%;
   }
 
+  .form-select__option {
+    font-size: 0.75rem;
+  }
+
   /* Footer */
   .footer__links-grid {
     grid-template-columns: 1fr;

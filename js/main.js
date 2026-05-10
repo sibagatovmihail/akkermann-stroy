@@ -965,13 +965,43 @@
     if (rvPrev) rvPrev.addEventListener('click', function () { rvGoTo(reviewsCurrentIdx - 1, true); });
     if (rvNext) rvNext.addEventListener('click', function () { rvGoTo(reviewsCurrentIdx + 1, true); });
 
-    /* Touch */
-    var rvTouchX = 0;
+    /* Touch — live drag tracking */
+    var rvTouchX      = 0;
+    var rvTouchBase   = 0;
+    var rvDragging    = false;
+    var rvTouchMoved  = false;
+
+    function rvCurrentOffset() {
+      var sw  = rvSlideWidth();
+      var gap = 16;
+      return -(reviewsCurrentIdx * (sw + gap));
+    }
+
     if (rvViewport) {
-      rvViewport.addEventListener('touchstart', function (e) { rvTouchX = e.changedTouches[0].clientX; }, { passive: true });
-      rvViewport.addEventListener('touchend',   function (e) {
+      rvViewport.addEventListener('touchstart', function (e) {
+        rvTouchX    = e.touches[0].clientX;
+        rvTouchBase = rvCurrentOffset();
+        rvDragging  = true;
+        rvTouchMoved = false;
+        rvTrack.style.transition = 'none';
+      }, { passive: true });
+
+      rvViewport.addEventListener('touchmove', function (e) {
+        if (!rvDragging) return;
+        var dx = e.touches[0].clientX - rvTouchX;
+        if (Math.abs(dx) > 5) rvTouchMoved = true;
+        rvTrack.style.transform = 'translateX(' + (rvTouchBase + dx) + 'px)';
+      }, { passive: true });
+
+      rvViewport.addEventListener('touchend', function (e) {
+        if (!rvDragging) return;
+        rvDragging = false;
         var dx = e.changedTouches[0].clientX - rvTouchX;
-        if (Math.abs(dx) > 40) rvGoTo(reviewsCurrentIdx + (dx < 0 ? 1 : -1), true);
+        if (Math.abs(dx) > 40) {
+          rvGoTo(reviewsCurrentIdx + (dx < 0 ? 1 : -1), true);
+        } else {
+          rvGoTo(reviewsCurrentIdx, true);
+        }
       }, { passive: true });
     }
 
