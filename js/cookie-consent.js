@@ -1,1 +1,191 @@
-!function(){"use strict";var e="akk_cookie_consent",t="G-E782S147EQ",c="datenschutzerklaerung.html";function n(){try{return JSON.parse(localStorage.getItem(e))}catch(e){return null}}function i(t){localStorage.setItem(e,JSON.stringify({analytics:t,ts:Date.now()})),t?console.log("%c[Cookie Consent] Accepted — Google Analytics will be loaded.","color: #f8b600; font-weight: bold;"):console.log("%c[Cookie Consent] Declined — no tracking scripts loaded.","color: #5a5c5c; font-weight: bold;")}function a(){if(!window._gaLoaded){window._gaLoaded=!0;var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id="+t,document.head.appendChild(e),window.dataLayer=window.dataLayer||[],window.gtag=function(){window.dataLayer.push(arguments)},gtag("js",new Date),gtag("config",t)}}function o(e){e.classList.add("cc-banner--hidden"),setTimeout(function(){e.parentNode&&e.parentNode.removeChild(e)},400)}function l(e){if(!document.getElementById("cc-modal-overlay")){var t,l=((t=document.createElement("div")).id="cc-modal-overlay",t.setAttribute("role","dialog"),t.setAttribute("aria-modal","true"),t.setAttribute("aria-label","Cookie-Einstellungen verwalten"),t.innerHTML='<div class="cc-modal"><div class="cc-modal__header"><p class="cc-modal__title">Cookie-Einstellungen</p><button class="cc-modal__close" id="cc-modal-close" aria-label="Schlie&szlig;en"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></button></div><div class="cc-modal__body"><div class="cc-category"><div class="cc-category__info"><p class="cc-category__name">Notwendig</p><p class="cc-category__desc">Erm&ouml;glichen grundlegende Funktionen wie Seitennavigation. Ohne diese Cookies kann die Website nicht richtig funktionieren.</p></div><div class="cc-toggle cc-toggle--locked" aria-label="Immer aktiv"><span class="cc-toggle__label">Immer aktiv</span></div></div><div class="cc-category"><div class="cc-category__info"><p class="cc-category__name">Analyse (Google Analytics)</p><p class="cc-category__desc">Helfen uns zu verstehen, wie Besucher mit der Website interagieren. IP-Adressen werden anonymisiert. Anbieter: Google Ireland Ltd. Mehr in der <a href="'+c+'" class="cc-link">Datenschutzerkl&auml;rung</a>.</p></div><label class="cc-toggle" aria-label="Analyse-Cookies"><input type="checkbox" id="cc-analytics-toggle" class="cc-toggle__input"><span class="cc-toggle__track"><span class="cc-toggle__thumb"></span></span></label></div></div><div class="cc-modal__footer"><button class="cc-btn cc-btn--outline" id="cc-save-btn">Auswahl speichern</button><button class="cc-btn cc-btn--accent" id="cc-accept-all-btn">Alle akzeptieren</button></div></div>',t);document.body.appendChild(l),requestAnimationFrame(function(){l.classList.add("cc-modal-overlay--visible")});var d=l.querySelector("#cc-analytics-toggle"),r=n();r&&r.analytics&&(d.checked=!0),l.querySelector("#cc-modal-close").addEventListener("click",function(){s(l)}),l.addEventListener("click",function(e){e.target===l&&s(l)}),l.querySelector("#cc-save-btn").addEventListener("click",function(){var t=d.checked;i(t),t&&a(),s(l),e&&o(e)}),l.querySelector("#cc-accept-all-btn").addEventListener("click",function(){i(!0),a(),s(l),e&&o(e)})}}function s(e){e.classList.remove("cc-modal-overlay--visible"),setTimeout(function(){e.parentNode&&e.parentNode.removeChild(e)},300)}function d(){var e=n();if(null===e){var t,s=((t=document.createElement("div")).id="cc-banner",t.setAttribute("role","dialog"),t.setAttribute("aria-modal","false"),t.setAttribute("aria-label","Cookie-Einstellungen"),t.innerHTML='<div class="cc-inner"><div class="cc-text"><p class="cc-title">Diese Website verwendet Cookies</p><p class="cc-body">Wir setzen technisch notwendige Cookies sowie &mdash; mit Ihrer Einwilligung &mdash; Analyse-Cookies (Google Analytics) ein, um die Nutzung unserer Website zu verstehen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO, &sect; 25 Abs. 1 TTDSG. Ihre Einwilligung ist freiwillig und jederzeit widerrufbar. Details in der <a href="'+c+'" class="cc-link">Datenschutzerkl&auml;rung</a>.</p></div><div class="cc-actions"><button class="cc-btn cc-btn--ghost" id="cc-settings-btn">Einstellungen</button><button class="cc-btn cc-btn--outline" id="cc-decline-btn">Ablehnen</button><button class="cc-btn cc-btn--accent" id="cc-accept-btn">Alle akzeptieren</button></div></div>',t);document.body.appendChild(s),requestAnimationFrame(function(){s.classList.add("cc-banner--visible")}),s.querySelector("#cc-accept-btn").addEventListener("click",function(){i(!0),a(),o(s)}),s.querySelector("#cc-decline-btn").addEventListener("click",function(){i(!1),o(s)}),s.querySelector("#cc-settings-btn").addEventListener("click",function(){l(s)})}else e.analytics&&a()}window.akkCookieConsent={openSettings:function(){l(document.getElementById("cc-banner")||null)},revoke:function(){try{localStorage.removeItem(e)}catch(e){}}},"loading"===document.readyState?document.addEventListener("DOMContentLoaded",d):d()}();
+(function () {
+  'use strict';
+
+  var STORAGE_KEY = 'akk_cookie_consent';
+  var GA_ID = 'G-E782S147EQ';
+  var PRIVACY_URL = 'datenschutzerklaerung.html';
+
+  /* ── Consent state ─────────────────────────────────────── */
+
+  function getConsent() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (e) { return null; }
+  }
+
+  function saveConsent(analytics) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ analytics: analytics, ts: Date.now() }));
+    if (analytics) {
+      console.log('%c[Cookie Consent] Accepted — Google Analytics will be loaded.', 'color: #f8b600; font-weight: bold;');
+    } else {
+      console.log('%c[Cookie Consent] Declined — no tracking scripts loaded.', 'color: #5a5c5c; font-weight: bold;');
+    }
+  }
+
+  /* ── Google Analytics loader ───────────────────────────── */
+
+  function loadGA() {
+    if (window._gaLoaded) return;
+    window._gaLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+  }
+
+  /* ── Render ────────────────────────────────────────────── */
+
+  function createBanner() {
+    var el = document.createElement('div');
+    el.id = 'cc-banner';
+    el.setAttribute('role', 'dialog');
+    el.setAttribute('aria-modal', 'false');
+    el.setAttribute('aria-label', 'Cookie-Einstellungen');
+    el.innerHTML =
+      '<div class="cc-inner">' +
+        '<div class="cc-text">' +
+          '<p class="cc-title">Diese Website verwendet Cookies</p>' +
+          '<p class="cc-body">Wir setzen technisch notwendige Cookies sowie &mdash; mit Ihrer Einwilligung &mdash; Analyse-Cookies (Google Analytics) ein, um die Nutzung unserer Website zu verstehen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO, &sect; 25 Abs. 1 TTDSG. Ihre Einwilligung ist freiwillig und jederzeit widerrufbar. Details in der <a href="' + PRIVACY_URL + '" class="cc-link">Datenschutzerkl&auml;rung</a>.</p>' +
+        '</div>' +
+        '<div class="cc-actions">' +
+          '<button class="cc-btn cc-btn--ghost" id="cc-settings-btn">Einstellungen</button>' +
+          '<button class="cc-btn cc-btn--outline" id="cc-decline-btn">Ablehnen</button>' +
+          '<button class="cc-btn cc-btn--accent" id="cc-accept-btn">Alle akzeptieren</button>' +
+        '</div>' +
+      '</div>';
+    return el;
+  }
+
+  function createModal() {
+    var el = document.createElement('div');
+    el.id = 'cc-modal-overlay';
+    el.setAttribute('role', 'dialog');
+    el.setAttribute('aria-modal', 'true');
+    el.setAttribute('aria-label', 'Cookie-Einstellungen verwalten');
+    el.innerHTML =
+      '<div class="cc-modal">' +
+        '<div class="cc-modal__header">' +
+          '<p class="cc-modal__title">Cookie-Einstellungen</p>' +
+          '<button class="cc-modal__close" id="cc-modal-close" aria-label="Schlie&szlig;en">' +
+            '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>' +
+          '</button>' +
+        '</div>' +
+        '<div class="cc-modal__body">' +
+          '<div class="cc-category">' +
+            '<div class="cc-category__info">' +
+              '<p class="cc-category__name">Notwendig</p>' +
+              '<p class="cc-category__desc">Erm&ouml;glichen grundlegende Funktionen wie Seitennavigation. Ohne diese Cookies kann die Website nicht richtig funktionieren.</p>' +
+            '</div>' +
+            '<div class="cc-toggle cc-toggle--locked" aria-label="Immer aktiv"><span class="cc-toggle__label">Immer aktiv</span></div>' +
+          '</div>' +
+          '<div class="cc-category">' +
+            '<div class="cc-category__info">' +
+              '<p class="cc-category__name">Analyse (Google Analytics)</p>' +
+              '<p class="cc-category__desc">Helfen uns zu verstehen, wie Besucher mit der Website interagieren. IP-Adressen werden anonymisiert. Anbieter: Google Ireland Ltd. Mehr in der <a href="' + PRIVACY_URL + '" class="cc-link">Datenschutzerkl&auml;rung</a>.</p>' +
+            '</div>' +
+            '<label class="cc-toggle" aria-label="Analyse-Cookies">' +
+              '<input type="checkbox" id="cc-analytics-toggle" class="cc-toggle__input">' +
+              '<span class="cc-toggle__track"><span class="cc-toggle__thumb"></span></span>' +
+            '</label>' +
+          '</div>' +
+        '</div>' +
+        '<div class="cc-modal__footer">' +
+          '<button class="cc-btn cc-btn--outline" id="cc-save-btn">Auswahl speichern</button>' +
+          '<button class="cc-btn cc-btn--accent" id="cc-accept-all-btn">Alle akzeptieren</button>' +
+        '</div>' +
+      '</div>';
+    return el;
+  }
+
+  /* ── Logic ─────────────────────────────────────────────── */
+
+  function hideBanner(banner) {
+    banner.classList.add('cc-banner--hidden');
+    setTimeout(function () { if (banner.parentNode) banner.parentNode.removeChild(banner); }, 400);
+  }
+
+  function showModal(banner) {
+    if (document.getElementById('cc-modal-overlay')) return;
+
+    var overlay = createModal();
+    document.body.appendChild(overlay);
+    requestAnimationFrame(function () { overlay.classList.add('cc-modal-overlay--visible'); });
+
+    var analyticsToggle = overlay.querySelector('#cc-analytics-toggle');
+    var consent = getConsent();
+    if (consent && consent.analytics) analyticsToggle.checked = true;
+
+    overlay.querySelector('#cc-modal-close').addEventListener('click', function () { closeModal(overlay); });
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(overlay); });
+
+    overlay.querySelector('#cc-save-btn').addEventListener('click', function () {
+      var allow = analyticsToggle.checked;
+      saveConsent(allow);
+      if (allow) loadGA();
+      closeModal(overlay);
+      if (banner) hideBanner(banner);
+    });
+
+    overlay.querySelector('#cc-accept-all-btn').addEventListener('click', function () {
+      saveConsent(true);
+      loadGA();
+      closeModal(overlay);
+      if (banner) hideBanner(banner);
+    });
+  }
+
+  function closeModal(overlay) {
+    overlay.classList.remove('cc-modal-overlay--visible');
+    setTimeout(function () { if (overlay.parentNode) overlay.parentNode.removeChild(overlay); }, 300);
+  }
+
+  /* ── Init ──────────────────────────────────────────────── */
+
+  function init() {
+    var consent = getConsent();
+
+    if (consent !== null) {
+      if (consent.analytics) loadGA();
+      return;
+    }
+
+    var banner = createBanner();
+    document.body.appendChild(banner);
+    requestAnimationFrame(function () { banner.classList.add('cc-banner--visible'); });
+
+    banner.querySelector('#cc-accept-btn').addEventListener('click', function () {
+      saveConsent(true);
+      loadGA();
+      hideBanner(banner);
+    });
+
+    banner.querySelector('#cc-decline-btn').addEventListener('click', function () {
+      saveConsent(false);
+      hideBanner(banner);
+    });
+
+    banner.querySelector('#cc-settings-btn').addEventListener('click', function () {
+      showModal(banner);
+    });
+  }
+
+  /* ── Public API ────────────────────────────────────────── */
+
+  window.akkCookieConsent = {
+    openSettings: function () {
+      var existingBanner = document.getElementById('cc-banner');
+      showModal(existingBanner || null);
+    },
+    revoke: function () {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    }
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

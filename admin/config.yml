@@ -1,0 +1,47 @@
+backend:
+  name: github
+  repo: sibagatovmihail/akkermann-stroy
+  branch: main
+  base_url: https://akkerman-stroy.de
+  auth_endpoint: api/auth
+
+locale: de
+
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: dczplrqsx
+    api_key: 548661572617621
+
+collections:
+  - name: gallery
+    label: Galerie
+    label_singular: Foto
+    files:
+      - name: gallery
+        label: Galerie-Fotos
+        file: content/gallery.json
+        fields:
+          - name: items
+            label: Fotos
+            label_singular: Foto
+            widget: list
+            summary: "{{alt}} — {{category}}"
+            fields:
+              - name: image
+                label: Bild
+                widget: image
+              - name: alt
+                label: Bildbeschreibung
+                widget: string
+                hint: Kurze Beschreibung des Bildes (z. B. „Badezimmer Renovierung")
+              - name: category
+                label: Kategorie
+                widget: select
+                options:
+                  - { label: Sanierung, value: sanierung }
+                  - { label: Fliesen, value: fliesen }
+                  - { label: Boden, value: boden }
+                  - { label: Maler, value: maler }
+                  - { label: Badrenovierung, value: badrenovierung }
+                  - { label: Außen, value: aussen }
