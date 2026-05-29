@@ -2,7 +2,7 @@ backend:
   name: github
   repo: sibagatovmihail/akkermann-stroy
   branch: main
-  base_url: https://akkerman-stroy.de
+  base_url: https://www.akkerman-stroy.de
   auth_endpoint: api/auth
 
 locale: de
