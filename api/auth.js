@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const { code } = req.query;
   const clientId = process.env.OAUTH_CLIENT_ID;
   const clientSecret = process.env.OAUTH_CLIENT_SECRET;
@@ -42,4 +42,4 @@ export default async function handler(req, res) {
   } catch (err) {
     res.status(500).send('Serverfehler beim OAuth-Austausch.');
   }
-}
+};
