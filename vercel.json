@@ -1,7 +1,5 @@
 {
-  "functions": {
-    "api/auth.js": {
-      "runtime": "nodejs24.x"
-    }
-  }
+  "routes": [
+    { "src": "/api/auth", "dest": "/api/auth.js" }
+  ]
 }
