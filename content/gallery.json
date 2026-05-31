@@ -1,3 +1,9 @@
 {
-  "items": []
+  "items": [
+    {
+      "category": "boden",
+      "alt": "minecraft",
+      "image": "https://res.cloudinary.com/dczplrqsx/image/upload/v1780076684/2024-11-30_23.27.30_lvb4jx.png"
+    }
+  ]
 }
