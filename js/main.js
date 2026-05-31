@@ -699,8 +699,8 @@
      ========================================== */
 
   /* --- Config: fill in your Place ID and Maps JS API key before going live --- */
-  var REVIEWS_PLACE_ID = '';
-  var REVIEWS_API_KEY  = '';
+  var REVIEWS_PLACE_ID = 'ChIJpZuk7XXDq0cRdCa6ejXgLYg';
+  var REVIEWS_API_KEY  = 'AIzaSyAndoHeSadi1KyDY6hikZEYsV97gA8l_xI';
 
   var REVIEWS_STATIC = [
     {
@@ -976,8 +976,10 @@
           });
           var scoreEl = document.querySelector('.google-badge__score');
           var countEl = document.querySelector('.google-badge__count');
+          var badgeStarsEl = document.getElementById('google-badge-stars');
           if (scoreEl && place.rating)              scoreEl.textContent = place.rating.toFixed(1);
           if (countEl && place.user_ratings_total)  countEl.textContent = place.user_ratings_total + ' Bewertungen';
+          if (badgeStarsEl && place.rating)         badgeStarsEl.outerHTML = buildStars(Math.round(place.rating));
           var writeBtn = document.querySelector('.reviews__cta-cover .btn');
           if (writeBtn) writeBtn.setAttribute('href', 'https://search.google.com/local/writereview?placeid=' + REVIEWS_PLACE_ID);
         } else {
