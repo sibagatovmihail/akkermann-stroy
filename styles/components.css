@@ -292,6 +292,7 @@
   font-size: var(--text-p2);
   color: var(--color-text-body);
   line-height: var(--leading-body);
+  min-height: calc(var(--leading-body) * var(--text-p2) * 3);
 }
 
 .process__step-circle {
