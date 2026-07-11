@@ -171,6 +171,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  overflow: hidden;
   z-index: 200;
   visibility: hidden;
   opacity: 0;

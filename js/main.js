@@ -627,7 +627,8 @@
         Array.prototype.forEach.call(
           galleryGrid.querySelectorAll('.gallery__item'),
           function (item) {
-            var match = filterValue === '*' || item.getAttribute('data-category') === filterValue;
+            var categories = (item.getAttribute('data-category') || '').split(' ');
+            var match = filterValue === '*' || categories.indexOf(filterValue) !== -1;
             if (match && shown < 7) {
               item.hidden = false;
               shown++;
