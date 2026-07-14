@@ -598,7 +598,7 @@
     }
 
     /* Clicking any visible grid image opens the full-gallery lightbox so the
-       user can arrow through every photo, not only the 7 currently shown. */
+       user can arrow through every photo, not only the ones currently shown. */
     galleryGrid.addEventListener('click', function (e) {
       var link = e.target.closest('a.glightbox');
       if (!link) return;
@@ -620,16 +620,20 @@
         filterBtns.forEach(function (b) { b.classList.remove('gallery__filter--active'); });
         btn.classList.add('gallery__filter--active');
 
-        /* Show only the first 7 items matching the filter — the rest stay
-           hidden but remain accessible via the full-gallery lightbox. */
+        /* Show only the first N items matching the filter — the rest stay
+           hidden but remain accessible via the full-gallery lightbox. "Alle"
+           and "Boden" include the 2-column wide cards, which already fill
+           the 3x3 grid at 7 photos; every other tab has no wide cards, so
+           it can fill the same grid with 9. */
         var filterValue = btn.getAttribute('data-filter');
+        var maxShown = (filterValue === '*' || filterValue === 'boden') ? 7 : 9;
         var shown = 0;
         Array.prototype.forEach.call(
           galleryGrid.querySelectorAll('.gallery__item'),
           function (item) {
             var categories = (item.getAttribute('data-category') || '').split(' ');
             var match = filterValue === '*' || categories.indexOf(filterValue) !== -1;
-            if (match && shown < 7) {
+            if (match && shown < maxShown) {
               item.hidden = false;
               shown++;
             } else {
