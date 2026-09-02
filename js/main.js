@@ -703,19 +703,22 @@
      Reviews Slider & Modal
      ========================================== */
 
-  /* --- Config: Place ID + Maps JS API key -------------------------------------
-     The cards below are placeholder copy, NOT real Google reviews. If the live
-     Places request fails for any reason (billing disabled on the Cloud project,
-     quota, referrer restriction, network, ad-blocker) the section hides itself
-     rather than passing placeholders off as verified Google reviews, and the
-     reason is logged to the console.
-     REVIEWS_ALLOW_PLACEHOLDER controls what happens when the live request
-     fails. true  -> the placeholder cards and the badge below are shown, so the
-                     section keeps working while the Places API is unavailable.
-     false -> the section, the badge and any nav link to it are hidden.
-     Set this back to false once the live reviews are running again. */
-  var REVIEWS_PLACE_ID = 'ChIJpZuk7XXDq0cRdCa6ejXgLYg';
-  var REVIEWS_API_KEY  = 'AIzaSyAndoHeSadi1KyDY6hikZEYsV97gA8l_xI';
+  /* --- Bewertungen -----------------------------------------------------------
+     Die Daten kommen von /api/reviews. Diese Serverless-Funktion ruft die Google
+     Places API serverseitig auf und wird auf Vercels CDN 24 Stunden lang
+     zwischengespeichert — Google wird also höchstens einmal pro Tag angefragt,
+     unabhängig von der Besucherzahl. Früher lud jeder Seitenaufruf das
+     Maps-JS-SDK und stellte eine eigene Places-Anfrage: eine kostenpflichtige
+     Anfrage pro Besucher, rund 200 KB zusätzliches JavaScript und der API-Key
+     im Quelltext. Beides ist damit erledigt; im Client steht kein Key mehr.
+
+     Die Karten unten sind Platzhalter, keine echten Rezensionen.
+     REVIEWS_ALLOW_PLACEHOLDER steuert, was passiert, wenn keine Live-Daten
+     verfügbar sind (Place ID/Key nicht gesetzt, API-Fehler, Netzwerkfehler):
+       true  -> Platzhalter-Karten und Badge bleiben sichtbar
+       false -> Bewertungsbereich, Badge und Navigationslink werden ausgeblendet
+     Nach dem Einrichten der Live-Bewertungen auf false setzen. */
+  var REVIEWS_ENDPOINT = '/api/reviews';
   var REVIEWS_ALLOW_PLACEHOLDER = true;
 
   var REVIEWS_STATIC = [
@@ -966,7 +969,7 @@
 
   /* --- Google Places API --- */
 
-  /* Single failure path: always log why, then fall back per the flag above. */
+  /* Ein einziger Fehlerpfad: Grund protokollieren, dann gemäß Flag zurückfallen. */
   function rvFail(reason, detail) {
     /* eslint-disable-next-line no-console */
     console.error('[reviews] Google-Bewertungen nicht geladen — ' + reason
@@ -992,128 +995,55 @@
     });
   }
 
-  function rvLoadData() {
-    if (!REVIEWS_PLACE_ID || !REVIEWS_API_KEY) {
-      rvFail('Place ID oder API-Key ist nicht gesetzt');
-      return;
-    }
-
-    var settled = false;
-    function settle(fn) {
-      if (settled) return;
-      settled = true;
-      clearTimeout(timer);
-      fn();
-    }
-
-    /* The Maps script can fail to execute the callback at all — blocked by an
-       ad-blocker, offline, DNS. Without this the section would stay empty
-       forever with nothing in the console. */
-    var timer = setTimeout(function () {
-      settle(function () {
-        rvFail('Zeitüberschreitung', 'Google Maps JS hat den Callback nicht innerhalb von 10 s ausgelöst');
-      });
-    }, 10000);
-
-    window._rvMapsReady = function () {
-      var dummy   = document.createElement('div');
-      var service = new google.maps.places.PlacesService(dummy);
-      service.getDetails({
-        placeId: REVIEWS_PLACE_ID,
-        fields: ['reviews', 'rating', 'user_ratings_total']
-      }, function (place, status) {
-        settle(function () {
-          var OK = google.maps.places.PlacesServiceStatus.OK;
-          if (status !== OK) {
-            /* Status is the actionable part. REQUEST_DENIED almost always means
-               billing is disabled or the Places API is not enabled on the Cloud
-               project; OVER_QUERY_LIMIT means quota. */
-            rvFail('Places-API-Status ' + status,
-              'Prüfen Sie Abrechnung und aktivierte APIs im Google-Cloud-Projekt des Keys');
-            return;
-          }
-          if (!place || !place.reviews || !place.reviews.length) {
-            rvFail('Antwort enthielt keine Rezensionen', 'Place ID ' + REVIEWS_PLACE_ID);
-            return;
-          }
-
-          reviewsData = place.reviews.map(function (r) {
-            return {
-              author_name:               r.author_name,
-              rating:                    r.rating,
-              text:                      r.text,
-              relative_time_description: r.relative_time_description,
-              profile_photo_url:         r.profile_photo_url,
-              author_url:                r.author_url
-            };
-          });
-
-          var scoreEl      = document.querySelector('.google-badge__score');
-          var countEl      = document.querySelector('.google-badge__count');
-          var badgeStarsEl = document.getElementById('google-badge-stars');
-          if (scoreEl && place.rating)             scoreEl.textContent = place.rating.toFixed(1);
-          if (countEl && place.user_ratings_total) countEl.textContent = place.user_ratings_total + ' Bewertungen';
-          if (badgeStarsEl && place.rating)        badgeStarsEl.outerHTML = buildStars(Math.round(place.rating));
-          var writeBtn = document.querySelector('.reviews__cta-cover .btn');
-          if (writeBtn) writeBtn.setAttribute('href', 'https://search.google.com/local/writereview?placeid=' + REVIEWS_PLACE_ID);
-
-          rvRender();
-        });
-      });
-    };
-
-    var s  = document.createElement('script');
-    /* loading=async is Google's documented requirement; without it the API
-       logs a performance warning on every page load. */
-    s.src  = 'https://maps.googleapis.com/maps/api/js?key=' + REVIEWS_API_KEY
-           + '&libraries=places&loading=async&callback=_rvMapsReady';
-    s.async = true;
-    s.defer = true;
-    s.onerror = function () {
-      settle(function () {
-        rvFail('Google-Maps-Skript konnte nicht geladen werden',
-          'Netzwerkfehler oder durch einen Content-Blocker unterbunden');
-      });
-    };
-    document.head.appendChild(s);
-  }
-
-  /* --- FAQ-Akkordeon ---
-     Das Panel animiert seine Höhe in CSS über grid-template-rows, deshalb
-     schaltet diese Funktion nur eine Klasse um und hält ARIA aktuell — keine
-     Höhenmessung, keine Inline-Styles. Ein geöffnetes Element schließt die
-     übrigen. Ohne JS bleibt der Antworttext im DOM und damit für Such- und
-     KI-Crawler lesbar. */
-  function initFaq() {
-    var items = Array.prototype.slice.call(document.querySelectorAll('.faq__item'));
-    if (!items.length) return;
-
-    items.forEach(function (item) {
-      var btn = item.querySelector('.faq__question');
-      if (!btn) return;
-
-      btn.addEventListener('click', function () {
-        var willOpen = !item.classList.contains('is-open');
-
-        items.forEach(function (other) {
-          other.classList.remove('is-open');
-          var b = other.querySelector('.faq__question');
-          if (b) b.setAttribute('aria-expanded', 'false');
-        });
-
-        if (willOpen) {
-          item.classList.add('is-open');
-          btn.setAttribute('aria-expanded', 'true');
-        }
-      });
+  function rvApplyLive(data) {
+    reviewsData = data.reviews.map(function (r) {
+      return {
+        author_name:               r.author,
+        rating:                    r.rating,
+        text:                      r.text,
+        relative_time_description: r.relativeTime,
+        profile_photo_url:         r.photo,
+        author_url:                r.authorUrl
+      };
     });
 
-    var first = items[0];
-    var firstBtn = first.querySelector('.faq__question');
-    if (firstBtn) {
-      first.classList.add('is-open');
-      firstBtn.setAttribute('aria-expanded', 'true');
-    }
+    var scoreEl      = document.querySelector('.google-badge__score');
+    var countEl      = document.querySelector('.google-badge__count');
+    var badgeStarsEl = document.getElementById('google-badge-stars');
+    if (scoreEl && data.rating)  scoreEl.textContent = data.rating.toFixed(1);
+    if (countEl && data.total)   countEl.textContent = data.total + ' Bewertungen';
+    if (badgeStarsEl && data.rating) badgeStarsEl.outerHTML = buildStars(Math.round(data.rating));
+    var writeBtn = document.querySelector('.reviews__cta-cover .btn');
+    if (writeBtn && data.writeReviewUrl) writeBtn.setAttribute('href', data.writeReviewUrl);
+
+    rvRender();
+  }
+
+  function rvLoadData() {
+    /* 8 s Abbruch: eine hängende Anfrage darf den Bereich nicht dauerhaft leer lassen. */
+    var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 8000);
+
+    fetch(REVIEWS_ENDPOINT, { headers: { accept: 'application/json' },
+                             signal: ctrl ? ctrl.signal : undefined })
+      .then(function (r) { return r.json().then(function (b) { return { status: r.status, body: b }; }); })
+      .then(function (r) {
+        clearTimeout(timer);
+        var d = r.body || {};
+        if (!d.ok || !d.reviews || !d.reviews.length) {
+          rvFail(d.configured === false
+                   ? 'Place ID / API-Key sind auf dem Server nicht gesetzt'
+                   : 'Antwort ohne Rezensionen (HTTP ' + r.status + ')',
+                 d.reason || '');
+          return;
+        }
+        rvApplyLive(d);
+      })
+      .catch(function (e) {
+        clearTimeout(timer);
+        rvFail('Anfrage an ' + REVIEWS_ENDPOINT + ' fehlgeschlagen',
+               e && e.name === 'AbortError' ? 'Zeitüberschreitung nach 8 s' : (e && e.message));
+      });
   }
 
   /* --- Areas expand/collapse --- */
