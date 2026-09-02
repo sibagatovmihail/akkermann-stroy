@@ -1,3 +1,72 @@
+# https://www.akkerman-stroy.de/robots.txt
+
 User-agent: *
 Allow: /
-Sitemap: https://akkerman-stroy.de/sitemap.xml
+Disallow: /admin/
+Disallow: /api/
+
+# ---- KI-Antwortmaschinen: ausdrücklich erlaubt (Tier 1) ----
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# ---- KI-Antwortmaschinen: erlaubt (Tier 2) ----
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# ---- Massen-Scraper ohne Referral-Nutzen: blockiert ----
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+# ---- Nutzungspräferenzen (IETF Content-Signal Draft) ----
+Content-Signal: search=yes, ai-train=yes, ai-retrieval=yes
+
+Sitemap: https://www.akkerman-stroy.de/sitemap.xml

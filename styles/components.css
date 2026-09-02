@@ -884,3 +884,111 @@ a.contact__info-value:hover {
 .form-success-modal__close:hover {
   background: #e0a400;
 }
+
+/* =============================================================================
+   FAQ — Frage-Antwort-Blöcke (SEO/GEO)
+   Natives <details>/<summary>: kein JS, tastaturbedienbar, Antworten stehen
+   immer im DOM und werden dadurch von Such- und KI-Crawlern gelesen.
+   ============================================================================= */
+
+.faq {
+  background: var(--color-surface-alt);
+  padding-block: var(--space-6xl);
+}
+
+.faq__header {
+  max-width: 44rem;
+  margin-inline: auto;
+  margin-block-end: var(--space-4xl);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.faq__desc {
+  color: var(--color-text-body);
+  line-height: 1.65;
+}
+
+.faq__list {
+  max-width: 48rem;
+  margin-inline: auto;
+}
+
+.faq__item {
+  border-block-end: 1px solid var(--color-divider);
+}
+
+.faq__item:first-child { border-block-start: 1px solid var(--color-divider); }
+
+.faq__question {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-block: var(--space-lg);
+  cursor: pointer;
+  list-style: none;
+  color: var(--color-text-heading);
+}
+
+.faq__question::-webkit-details-marker { display: none; }
+
+.faq__question h3 {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: inherit;
+}
+
+.faq__question:hover,
+.faq__item[open] > .faq__question { color: var(--color-primary); }
+
+.faq__icon {
+  flex-shrink: 0;
+  margin-block-start: 0.3rem;
+  color: var(--color-primary);
+  transition: transform 0.25s ease;
+}
+
+.faq__item[open] .faq__icon { transform: rotate(180deg); }
+
+.faq__answer { padding-block-end: var(--space-lg); }
+
+.faq__answer p {
+  color: var(--color-text-body);
+  line-height: 1.7;
+  max-width: 42rem;
+}
+
+/* =============================================================================
+   Lokaler Kontext (Stadtseiten)
+   ============================================================================= */
+
+.local { padding-block: var(--space-6xl); }
+
+.local__inner {
+  max-width: 48rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.local__text p {
+  color: var(--color-text-body);
+  line-height: 1.7;
+}
+
+.local__text p + p { margin-block-start: var(--space-md); }
+
+@media (max-width: 48rem) {
+  .faq, .local { padding-block: var(--space-4xl); }
+  .faq__question h3 { font-size: 1.0625rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq__icon { transition: none; }
+}

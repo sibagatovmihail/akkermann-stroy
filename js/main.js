@@ -703,9 +703,19 @@
      Reviews Slider & Modal
      ========================================== */
 
-  /* --- Config: fill in your Place ID and Maps JS API key before going live --- */
+  /* --- Config: Place ID + Maps JS API key -------------------------------------
+     The cards below are placeholder copy, NOT real Google reviews. If the live
+     Places request fails for any reason (billing disabled on the Cloud project,
+     quota, referrer restriction, network, ad-blocker) the section hides itself
+     rather than passing placeholders off as verified Google reviews, and the
+     reason is logged to the console.
+     Set REVIEWS_ALLOW_PLACEHOLDER to true only if you deliberately want the
+     placeholder cards shown; the Google score/count badge and the
+     "Verifiziert durch Google Maps" line stay hidden either way, because
+     neither can be substantiated without the live data. */
   var REVIEWS_PLACE_ID = 'ChIJpZuk7XXDq0cRdCa6ejXgLYg';
   var REVIEWS_API_KEY  = 'AIzaSyAndoHeSadi1KyDY6hikZEYsV97gA8l_xI';
+  var REVIEWS_ALLOW_PLACEHOLDER = false;
 
   var REVIEWS_STATIC = [
     {
@@ -954,12 +964,58 @@
   }
 
   /* --- Google Places API --- */
-  function rvLoadData() {
-    if (!REVIEWS_PLACE_ID || !REVIEWS_API_KEY) {
+
+  /* Single failure path: log why, then degrade honestly. */
+  function rvFail(reason, detail) {
+    /* eslint-disable-next-line no-console */
+    console.error('[reviews] Google-Bewertungen nicht geladen — ' + reason
+      + (detail ? ': ' + detail : '')
+      + '. Die Karten unten sind Platzhalter, keine echten Google-Rezensionen.');
+
+    /* The score/count badge and the "verified" line assert live Google data.
+       Without it they are unsubstantiated, so they go regardless of the flag. */
+    var badge = document.querySelector('.reviews__google-badge');
+    if (badge) badge.style.display = 'none';
+
+    if (REVIEWS_ALLOW_PLACEHOLDER) {
       reviewsData = REVIEWS_STATIC;
       rvRender();
       return;
     }
+
+    /* Hide the section and any nav link pointing at it, so the page has no
+       dead anchor and no invented testimonials. */
+    var section = document.getElementById('reviews');
+    if (section) section.style.display = 'none';
+    var links = document.querySelectorAll('a[href="#reviews"], a[href$="index.html#reviews"]');
+    Array.prototype.forEach.call(links, function (a) {
+      var li = a.closest('li');
+      (li || a).style.display = 'none';
+    });
+  }
+
+  function rvLoadData() {
+    if (!REVIEWS_PLACE_ID || !REVIEWS_API_KEY) {
+      rvFail('Place ID oder API-Key ist nicht gesetzt');
+      return;
+    }
+
+    var settled = false;
+    function settle(fn) {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      fn();
+    }
+
+    /* The Maps script can fail to execute the callback at all — blocked by an
+       ad-blocker, offline, DNS. Without this the section would stay empty
+       forever with nothing in the console. */
+    var timer = setTimeout(function () {
+      settle(function () {
+        rvFail('Zeitüberschreitung', 'Google Maps JS hat den Callback nicht innerhalb von 10 s ausgelöst');
+      });
+    }, 10000);
 
     window._rvMapsReady = function () {
       var dummy   = document.createElement('div');
@@ -968,7 +1024,21 @@
         placeId: REVIEWS_PLACE_ID,
         fields: ['reviews', 'rating', 'user_ratings_total']
       }, function (place, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK && place.reviews && place.reviews.length) {
+        settle(function () {
+          var OK = google.maps.places.PlacesServiceStatus.OK;
+          if (status !== OK) {
+            /* Status is the actionable part. REQUEST_DENIED almost always means
+               billing is disabled or the Places API is not enabled on the Cloud
+               project; OVER_QUERY_LIMIT means quota. */
+            rvFail('Places-API-Status ' + status,
+              'Prüfen Sie Abrechnung und aktivierte APIs im Google-Cloud-Projekt des Keys');
+            return;
+          }
+          if (!place || !place.reviews || !place.reviews.length) {
+            rvFail('Antwort enthielt keine Rezensionen', 'Place ID ' + REVIEWS_PLACE_ID);
+            return;
+          }
+
           reviewsData = place.reviews.map(function (r) {
             return {
               author_name:               r.author_name,
@@ -979,25 +1049,34 @@
               author_url:                r.author_url
             };
           });
-          var scoreEl = document.querySelector('.google-badge__score');
-          var countEl = document.querySelector('.google-badge__count');
+
+          var scoreEl      = document.querySelector('.google-badge__score');
+          var countEl      = document.querySelector('.google-badge__count');
           var badgeStarsEl = document.getElementById('google-badge-stars');
-          if (scoreEl && place.rating)              scoreEl.textContent = place.rating.toFixed(1);
-          if (countEl && place.user_ratings_total)  countEl.textContent = place.user_ratings_total + ' Bewertungen';
-          if (badgeStarsEl && place.rating)         badgeStarsEl.outerHTML = buildStars(Math.round(place.rating));
+          if (scoreEl && place.rating)             scoreEl.textContent = place.rating.toFixed(1);
+          if (countEl && place.user_ratings_total) countEl.textContent = place.user_ratings_total + ' Bewertungen';
+          if (badgeStarsEl && place.rating)        badgeStarsEl.outerHTML = buildStars(Math.round(place.rating));
           var writeBtn = document.querySelector('.reviews__cta-cover .btn');
           if (writeBtn) writeBtn.setAttribute('href', 'https://search.google.com/local/writereview?placeid=' + REVIEWS_PLACE_ID);
-        } else {
-          reviewsData = REVIEWS_STATIC;
-        }
-        rvRender();
+
+          rvRender();
+        });
       });
     };
 
     var s  = document.createElement('script');
-    s.src  = 'https://maps.googleapis.com/maps/api/js?key=' + REVIEWS_API_KEY + '&libraries=places&callback=_rvMapsReady';
+    /* loading=async is Google's documented requirement; without it the API
+       logs a performance warning on every page load. */
+    s.src  = 'https://maps.googleapis.com/maps/api/js?key=' + REVIEWS_API_KEY
+           + '&libraries=places&loading=async&callback=_rvMapsReady';
     s.async = true;
     s.defer = true;
+    s.onerror = function () {
+      settle(function () {
+        rvFail('Google-Maps-Skript konnte nicht geladen werden',
+          'Netzwerkfehler oder durch einen Content-Blocker unterbunden');
+      });
+    };
     document.head.appendChild(s);
   }
 
