@@ -1379,6 +1379,20 @@
   color: var(--color-grey);
 }
 
+/* Studio credit — readable as a link without competing with the legal links. */
+.footer__vias {
+  color: var(--color-grey);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-color: rgba(255, 255, 255, 0.25);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.footer__vias:hover,
+.footer__vias:focus-visible {
+  color: var(--color-text-white);
+  text-decoration-color: currentColor;
+}
+
 .footer__legal {
   display: flex;
   gap: var(--space-xl);

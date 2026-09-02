@@ -886,9 +886,11 @@ a.contact__info-value:hover {
 }
 
 /* =============================================================================
-   FAQ — Frage-Antwort-Blöcke (SEO/GEO)
-   Natives <details>/<summary>: kein JS, tastaturbedienbar, Antworten stehen
-   immer im DOM und werden dadurch von Such- und KI-Crawlern gelesen.
+   FAQ — animiertes Akkordeon (SEO/GEO)
+   Das Panel ist ein CSS-Grid, das grid-template-rows von 0fr auf 1fr animiert
+   und die Höhe so ohne JS-Messung weich überblendet. Die Frage steht in einem
+   echten <h3> um den Button, damit Überschriftenstruktur und FAQPage-Markup
+   weiterhin übereinstimmen. Ein geöffnetes Element schließt die anderen (main.js).
    ============================================================================= */
 
 .faq {
@@ -916,51 +918,70 @@ a.contact__info-value:hover {
   margin-inline: auto;
 }
 
-.faq__item {
-  border-block-end: 1px solid var(--color-divider);
-}
-
+.faq__item { border-block-end: 1px solid var(--color-divider); }
 .faq__item:first-child { border-block-start: 1px solid var(--color-divider); }
 
+.faq__q-heading { margin: 0; font: inherit; }
+
 .faq__question {
+  width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
   padding-block: var(--space-lg);
+  background: none;
+  border: none;
+  text-align: left;
   cursor: pointer;
-  list-style: none;
   color: var(--color-text-heading);
+  font-family: inherit;
 }
 
-.faq__question::-webkit-details-marker { display: none; }
-
-.faq__question h3 {
+.faq__q-text {
   font-family: var(--font-heading);
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 1.4;
-  color: inherit;
+  transition: color 0.2s ease;
 }
 
-.faq__question:hover,
-.faq__item[open] > .faq__question { color: var(--color-primary); }
+.faq__question:hover .faq__q-text,
+.faq__item.is-open .faq__q-text { color: var(--color-primary); }
 
 .faq__icon {
   flex-shrink: 0;
-  margin-block-start: 0.3rem;
-  color: var(--color-primary);
-  transition: transform 0.25s ease;
+  color: var(--color-label);
+  transition: transform 0.35s cubic-bezier(0.3, 0.7, 0.4, 1), color 0.2s ease;
 }
 
-.faq__item[open] .faq__icon { transform: rotate(180deg); }
+.faq__item.is-open .faq__icon { transform: rotate(180deg); color: var(--color-accent); }
 
-.faq__answer { padding-block-end: var(--space-lg); }
+/* grid-rows 0fr -> 1fr animiert die Panelhöhe ohne JS-Messung */
+.faq__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.faq__item.is-open .faq__panel { grid-template-rows: 1fr; }
+
+.faq__answer { overflow: hidden; }
 
 .faq__answer p {
   color: var(--color-text-body);
   line-height: 1.7;
   max-width: 42rem;
+  padding-block-end: var(--space-lg);
+}
+
+@media (max-width: 48rem) {
+  .faq { padding-block: var(--space-4xl); }
+  .faq__q-text { font-size: 1.0625rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq__panel, .faq__icon, .faq__q-text { transition: none; }
 }
 
 /* =============================================================================

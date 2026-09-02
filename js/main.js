@@ -709,13 +709,14 @@
      quota, referrer restriction, network, ad-blocker) the section hides itself
      rather than passing placeholders off as verified Google reviews, and the
      reason is logged to the console.
-     Set REVIEWS_ALLOW_PLACEHOLDER to true only if you deliberately want the
-     placeholder cards shown; the Google score/count badge and the
-     "Verifiziert durch Google Maps" line stay hidden either way, because
-     neither can be substantiated without the live data. */
+     REVIEWS_ALLOW_PLACEHOLDER controls what happens when the live request
+     fails. true  -> the placeholder cards and the badge below are shown, so the
+                     section keeps working while the Places API is unavailable.
+     false -> the section, the badge and any nav link to it are hidden.
+     Set this back to false once the live reviews are running again. */
   var REVIEWS_PLACE_ID = 'ChIJpZuk7XXDq0cRdCa6ejXgLYg';
   var REVIEWS_API_KEY  = 'AIzaSyAndoHeSadi1KyDY6hikZEYsV97gA8l_xI';
-  var REVIEWS_ALLOW_PLACEHOLDER = false;
+  var REVIEWS_ALLOW_PLACEHOLDER = true;
 
   var REVIEWS_STATIC = [
     {
@@ -965,17 +966,14 @@
 
   /* --- Google Places API --- */
 
-  /* Single failure path: log why, then degrade honestly. */
+  /* Single failure path: always log why, then fall back per the flag above. */
   function rvFail(reason, detail) {
     /* eslint-disable-next-line no-console */
     console.error('[reviews] Google-Bewertungen nicht geladen — ' + reason
       + (detail ? ': ' + detail : '')
-      + '. Die Karten unten sind Platzhalter, keine echten Google-Rezensionen.');
-
-    /* The score/count badge and the "verified" line assert live Google data.
-       Without it they are unsubstantiated, so they go regardless of the flag. */
-    var badge = document.querySelector('.reviews__google-badge');
-    if (badge) badge.style.display = 'none';
+      + (REVIEWS_ALLOW_PLACEHOLDER
+          ? '. Es werden die Platzhalter-Karten angezeigt.'
+          : '. Der Bewertungsbereich wird ausgeblendet.'));
 
     if (REVIEWS_ALLOW_PLACEHOLDER) {
       reviewsData = REVIEWS_STATIC;
@@ -983,8 +981,8 @@
       return;
     }
 
-    /* Hide the section and any nav link pointing at it, so the page has no
-       dead anchor and no invented testimonials. */
+    var badge = document.querySelector('.reviews__google-badge');
+    if (badge) badge.style.display = 'none';
     var section = document.getElementById('reviews');
     if (section) section.style.display = 'none';
     var links = document.querySelectorAll('a[href="#reviews"], a[href$="index.html#reviews"]');
@@ -1078,6 +1076,44 @@
       });
     };
     document.head.appendChild(s);
+  }
+
+  /* --- FAQ-Akkordeon ---
+     Das Panel animiert seine Höhe in CSS über grid-template-rows, deshalb
+     schaltet diese Funktion nur eine Klasse um und hält ARIA aktuell — keine
+     Höhenmessung, keine Inline-Styles. Ein geöffnetes Element schließt die
+     übrigen. Ohne JS bleibt der Antworttext im DOM und damit für Such- und
+     KI-Crawler lesbar. */
+  function initFaq() {
+    var items = Array.prototype.slice.call(document.querySelectorAll('.faq__item'));
+    if (!items.length) return;
+
+    items.forEach(function (item) {
+      var btn = item.querySelector('.faq__question');
+      if (!btn) return;
+
+      btn.addEventListener('click', function () {
+        var willOpen = !item.classList.contains('is-open');
+
+        items.forEach(function (other) {
+          other.classList.remove('is-open');
+          var b = other.querySelector('.faq__question');
+          if (b) b.setAttribute('aria-expanded', 'false');
+        });
+
+        if (willOpen) {
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    var first = items[0];
+    var firstBtn = first.querySelector('.faq__question');
+    if (firstBtn) {
+      first.classList.add('is-open');
+      firstBtn.setAttribute('aria-expanded', 'true');
+    }
   }
 
   /* --- Areas expand/collapse --- */
@@ -1345,6 +1381,7 @@
     // initProcessAnimation(); /* DISABLED — use initProcessScrollReveal instead */
     initProcessScrollReveal();
     initAreasExpand();
+    initFaq();
 
     document.addEventListener('click', handleOutsideClick);
 
