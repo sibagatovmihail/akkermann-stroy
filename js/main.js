@@ -1133,6 +1133,44 @@
     rvLoadData();
   }
 
+  /* --- FAQ-Akkordeon ---
+     Das Panel animiert seine Höhe in CSS über grid-template-rows, deshalb
+     schaltet diese Funktion nur eine Klasse um und hält ARIA aktuell — keine
+     Höhenmessung, keine Inline-Styles. Ein geöffnetes Element schließt die
+     übrigen. Ohne JS bleibt der Antworttext im DOM und damit für Such- und
+     KI-Crawler lesbar. */
+  function initFaq() {
+    var items = Array.prototype.slice.call(document.querySelectorAll('.faq__item'));
+    if (!items.length) return;
+
+    items.forEach(function (item) {
+      var btn = item.querySelector('.faq__question');
+      if (!btn) return;
+
+      btn.addEventListener('click', function () {
+        var willOpen = !item.classList.contains('is-open');
+
+        items.forEach(function (other) {
+          other.classList.remove('is-open');
+          var b = other.querySelector('.faq__question');
+          if (b) b.setAttribute('aria-expanded', 'false');
+        });
+
+        if (willOpen) {
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    var first = items[0];
+    var firstBtn = first.querySelector('.faq__question');
+    if (firstBtn) {
+      first.classList.add('is-open');
+      firstBtn.setAttribute('aria-expanded', 'true');
+    }
+  }
+
   /* --- Stats ticker (mobile single-row loop) --- */
   function initStatsTicker() {
     if (!window.matchMedia('(max-width: 37.5rem)').matches) return;
