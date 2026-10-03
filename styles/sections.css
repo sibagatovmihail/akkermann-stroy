@@ -11,6 +11,12 @@
   z-index: 100;
 }
 
+/* Reserves the fixed header's measured height (92px at every width) before
+   syncHeaderHeight() runs, so <main> does not jump after first paint (CLS). */
+#header-spacer {
+  height: 5.75rem;
+}
+
 .navbar {
   background-color: var(--color-surface-alt);
   padding-block: var(--space-lg);
@@ -1130,10 +1136,13 @@
 
 .reviews__dots {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
+/* ::before widens the tap target to 24px (WCAG 2.5.8) without changing the dot;
+   the 1rem gap keeps neighbouring targets from overlapping. */
 .reviews__dot {
+  position: relative;
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
@@ -1142,6 +1151,12 @@
   cursor: pointer;
   padding: 0;
   transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.reviews__dot::before {
+  content: "";
+  position: absolute;
+  inset: -0.5rem;
 }
 
 .reviews__dot--active {

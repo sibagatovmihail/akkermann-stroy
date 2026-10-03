@@ -6,6 +6,9 @@
   <title>Innenausbau &amp; Sanierung in Schwerin — Handwerksbetrieb | AkkermanStroy</title>
   <meta name="description" content="Badrenovierung, Bodenverlegung, Trockenbau, Fenster und Türen sowie Komplettsanierung in Schwerin. Ortstermin und Angebot kostenlos. Handwerksbetrieb aus Neubrandenburg.">
   <link rel="canonical" href="https://www.akkerman-stroy.de/schwerin.html">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -24,12 +27,14 @@
 
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Manrope:wght@400;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin-be2572.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin-1ab1ad.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/manrope-latin-814019.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles/fonts.css">
 
   <!-- GLightbox -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
+  <link rel="stylesheet" href="assets/vendor/glightbox.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="assets/vendor/glightbox.min.css"></noscript>
 
   <!-- Styles -->
   <link rel="stylesheet" href="styles/tokens.css">
@@ -528,7 +533,7 @@
       <div class="navbar__inner">
         <div class="navbar__logo-wrap">
           <a href="index.html" class="navbar__logo" aria-label="AkkermanStroy Startseite">
-            <img src="assets/images/logo-nav.png" alt="AkkermanStroy" class="navbar__logo-img">
+            <img src="assets/images/logo-nav-125.png" srcset="assets/images/logo-nav-125.png 1x, assets/images/logo-nav-250.png 2x, assets/images/logo-nav-375.png 3x" width="125" height="32" alt="AkkermanStroy" class="navbar__logo-img">
           </a>
         </div>
 
@@ -568,7 +573,7 @@
         </nav>
 
         <div class="navbar__actions">
-          <a href="#contact" class="btn btn--accent navbar__cta">
+          <a href="#contact" class="btn btn--accent navbar__cta" aria-label="Kontakt">
             <div class="btn__label"><span>Kontakt</span></div>
             <img src="assets/icons/phone-icon.svg" alt="" class="navbar__cta-icon" aria-hidden="true">
           </a>
@@ -715,7 +720,7 @@
           <!-- Card 1: Badrenovierung -->
           <article class="service-card">
             <div class="service-card__image">
-              <img src="assets/images/service-fliesen.jpg" alt="Badrenovierung & Fliesenarbeiten" loading="lazy">
+              <img src="assets/images/service-fliesen-800.webp" srcset="assets/images/service-fliesen-480.webp 480w, assets/images/service-fliesen-800.webp 800w, assets/images/service-fliesen.jpg 924w" sizes="(max-width: 48rem) 100vw, 33vw" width="924" height="2000" alt="Badrenovierung & Fliesenarbeiten" loading="lazy">
             </div>
             <div class="service-card__body">
               <div class="service-card__meta">
@@ -744,7 +749,7 @@
           <!-- Card 2: Bodenverlegung -->
           <article class="service-card">
             <div class="service-card__image">
-              <img src="assets/images/service-boden.jpg" alt="Bodenverlegung — Parkett & Laminat" loading="lazy">
+              <img src="assets/images/service-boden-480.webp" srcset="assets/images/service-boden-480.webp 480w, assets/images/service-boden.jpg 739w" sizes="(max-width: 48rem) 100vw, 33vw" width="739" height="1600" alt="Bodenverlegung — Parkett & Laminat" loading="lazy">
             </div>
             <div class="service-card__body">
               <div class="service-card__meta">
@@ -773,7 +778,7 @@
           <!-- Card 3: Komplettsanierung -->
           <article class="service-card">
             <div class="service-card__image">
-              <img src="assets/images/service-sanierung.jpg" alt="Komplettsanierung aus einer Hand" loading="lazy">
+              <img src="assets/images/service-sanierung-800.webp" srcset="assets/images/service-sanierung-480.webp 480w, assets/images/service-sanierung-800.webp 800w, assets/images/service-sanierung-1200.webp 1200w" sizes="(max-width: 48rem) 100vw, 33vw" width="1200" height="1600" alt="Komplettsanierung aus einer Hand" loading="lazy">
             </div>
             <div class="service-card__body">
               <div class="service-card__meta">
@@ -868,7 +873,7 @@
                   </div>
                 </div>
                 <div class="accordion-item__media">
-                  <img src="assets/images/service-fliesen.jpg" alt="Badrenovierung — Fliesenarbeiten" loading="lazy">
+                  <img src="assets/images/service-fliesen-800.webp" srcset="assets/images/service-fliesen-480.webp 480w, assets/images/service-fliesen-800.webp 800w, assets/images/service-fliesen.jpg 924w" sizes="(max-width: 48rem) 100vw, 33vw" width="924" height="2000" alt="Badrenovierung — Fliesenarbeiten" loading="lazy">
                 </div>
               </div>
             </div>
@@ -917,7 +922,7 @@
                   </div>
                 </div>
                 <div class="accordion-item__media">
-                  <img src="assets/images/service-boden.jpg" alt="Bodenarbeiten — Parkett und Laminat" loading="lazy">
+                  <img src="assets/images/service-boden-480.webp" srcset="assets/images/service-boden-480.webp 480w, assets/images/service-boden.jpg 739w" sizes="(max-width: 48rem) 100vw, 33vw" width="739" height="1600" alt="Bodenarbeiten — Parkett und Laminat" loading="lazy">
                 </div>
               </div>
             </div>
@@ -966,7 +971,7 @@
                   </div>
                 </div>
                 <div class="accordion-item__media">
-                  <img src="assets/images/service-trockenbau.jpg" alt="Trockenbau und Innenausbau" loading="lazy">
+                  <img src="assets/images/service-trockenbau-800.webp" srcset="assets/images/service-trockenbau-480.webp 480w, assets/images/service-trockenbau-800.webp 800w, assets/images/service-trockenbau-1200.webp 1200w" sizes="(max-width: 48rem) 100vw, 33vw" width="1200" height="1600" alt="Trockenbau und Innenausbau" loading="lazy">
                 </div>
               </div>
             </div>
@@ -1014,7 +1019,7 @@
                   </div>
                 </div>
                 <div class="accordion-item__media">
-                  <img src="assets/images/service-fassade.jpg" alt="Dachfenster und Türmontage" loading="lazy">
+                  <img src="assets/images/service-fassade-800.webp" srcset="assets/images/service-fassade-480.webp 480w, assets/images/service-fassade-800.webp 800w, assets/images/service-fassade-1200.webp 1200w" sizes="(max-width: 48rem) 100vw, 33vw" width="1600" height="1200" alt="Dachfenster und Türmontage" loading="lazy">
                 </div>
               </div>
             </div>
@@ -1063,7 +1068,7 @@
                   </div>
                 </div>
                 <div class="accordion-item__media">
-                  <img src="assets/images/service-sanierung.jpg" alt="Komplettsanierung aus einer Hand" loading="lazy">
+                  <img src="assets/images/service-sanierung-800.webp" srcset="assets/images/service-sanierung-480.webp 480w, assets/images/service-sanierung-800.webp 800w, assets/images/service-sanierung-1200.webp 1200w" sizes="(max-width: 48rem) 100vw, 33vw" width="1200" height="1600" alt="Komplettsanierung aus einer Hand" loading="lazy">
                 </div>
               </div>
             </div>
@@ -1821,7 +1826,7 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <div class="footer__logo">
-            <img src="assets/images/logo-white.png" alt="AkkermanStroy" class="footer__logo-img">
+            <img src="assets/images/logo-white.png" width="125" height="32" alt="AkkermanStroy" class="footer__logo-img" loading="lazy">
           </div>
           <div class="footer__brand-desc-cover">
             <p>Handwerkskunst, die Räume verwandelt. Ihr Partner für hochwertige Bau- und Renovierungsarbeiten.</p>
@@ -1899,7 +1904,7 @@
   </div>
 
   <!-- GLightbox -->
-  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js" defer></script>
+  <script src="assets/vendor/glightbox.min.js" defer></script>
   
   <!-- Form success popup -->
   <div class="form-success-overlay" id="form-success-overlay" aria-hidden="true">

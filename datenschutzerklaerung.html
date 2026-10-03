@@ -7,11 +7,15 @@
   <meta name="description" content="Datenschutzerklärung von AkkermanStroy gemäß DSGVO. Informationen zur Verarbeitung personenbezogener Daten, Cookies, Google Analytics, Kontaktformular und Ihren Rechten.">
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://www.akkerman-stroy.de/datenschutzerklaerung.html">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Manrope:wght@400;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin-be2572.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin-1ab1ad.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/manrope-latin-814019.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles/fonts.css">
 
   <!-- Styles -->
   <link rel="stylesheet" href="styles/tokens.css">
@@ -73,7 +77,7 @@
       <div class="navbar__inner">
         <div class="navbar__logo-wrap">
           <a href="index.html" class="navbar__logo" aria-label="AkkermanStroy Startseite">
-            <img src="assets/images/logo-nav.png" alt="AkkermanStroy" class="navbar__logo-img">
+            <img src="assets/images/logo-nav-125.png" srcset="assets/images/logo-nav-125.png 1x, assets/images/logo-nav-250.png 2x, assets/images/logo-nav-375.png 3x" width="125" height="32" alt="AkkermanStroy" class="navbar__logo-img">
           </a>
         </div>
 
@@ -284,25 +288,19 @@
 
           <div class="legal__section">
             <div class="legal__section-title-cover">
-              <h2>8. Google Fonts</h2>
+              <h2>8. Schriftarten (lokal gehostet)</h2>
             </div>
             <div class="legal__paragraph-cover">
-              <p>Diese Website bindet Schriftarten („Google Fonts“) der Google Ireland Limited ein. Beim Aufruf einer Seite lädt Ihr Browser die benötigten Schriftarten von einem Google-Server, wodurch Ihre IP-Adresse an Google übermittelt wird. Die Verwendung von Google Fonts erfolgt im Interesse einer einheitlichen und ansprechenden Darstellung unserer Inhalte (Art. 6 Abs. 1 lit. f DSGVO).</p>
-            </div>
-            <div class="legal__paragraph-cover">
-              <p>Weitere Informationen zu Google Fonts finden Sie unter <a href="https://developers.google.com/fonts/faq" target="_blank" rel="noopener noreferrer">https://developers.google.com/fonts/faq</a> sowie in der Datenschutzerklärung von Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a>.</p>
+              <p>Diese Website verwendet die Schriftarten „Inter“, „Manrope“ und „Plus Jakarta Sans“. Die Schriftdateien liegen auf unserem eigenen Server und werden von dort ausgeliefert. Beim Aufruf einer Seite wird keine Verbindung zu Servern von Google oder anderen Drittanbietern hergestellt; es werden dabei keine Daten an Dritte übermittelt.</p>
             </div>
           </div>
 
           <div class="legal__section">
             <div class="legal__section-title-cover">
-              <h2>9. Eingebundene Drittanbieter-Bibliotheken (CDN)</h2>
+              <h2>9. Bildergalerie (GLightbox)</h2>
             </div>
             <div class="legal__paragraph-cover">
-              <p>Zur Darstellung der Bildergalerie nutzen wir die Open-Source-Bibliothek „GLightbox“, die über das Content Delivery Network <strong>jsDelivr</strong> (betrieben durch Prospect One Sp. z o.o., Polen) ausgeliefert wird. Beim Aufruf der Website wird Ihre IP-Adresse technisch bedingt an den jsDelivr-Server übertragen, damit die Bibliothek geladen werden kann. Eine darüber hinausgehende Verarbeitung durch jsDelivr findet nach unserem Kenntnisstand nicht statt.</p>
-            </div>
-            <div class="legal__paragraph-cover">
-              <p>Rechtsgrundlage ist unser berechtigtes Interesse an einer schnellen und stabilen Auslieferung statischer Skript- und Stylesheet-Dateien (Art. 6 Abs. 1 lit. f DSGVO). Datenschutzhinweise von jsDelivr: <a href="https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net" target="_blank" rel="noopener noreferrer">https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net</a>.</p>
+              <p>Zur Darstellung der Bildergalerie nutzen wir die Open-Source-Bibliothek „GLightbox“. Die Bibliothek liegt auf unserem eigenen Server und wird von dort ausgeliefert; es wird dafür keine Verbindung zu einem Content Delivery Network oder einem anderen Drittanbieter hergestellt.</p>
             </div>
           </div>
 
@@ -389,7 +387,7 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <div class="footer__logo">
-            <img src="assets/images/logo-white.png" alt="AkkermanStroy" class="footer__logo-img">
+            <img src="assets/images/logo-white.png" width="125" height="32" alt="AkkermanStroy" class="footer__logo-img" loading="lazy">
           </div>
           <div class="footer__brand-desc-cover">
             <p>Handwerkskunst, die Räume verwandelt. Ihr Partner für hochwertige Bau- und Renovierungsarbeiten.</p>

@@ -799,7 +799,7 @@
   var STAR_PATH = 'm8 1.333 2.06 4.174 4.607.674-3.334 3.248.787 4.588L8 11.513l-4.12 2.504.787-4.588L1.333 6.18l4.607-.674L8 1.333Z';
 
   function buildStars(rating) {
-    var html = '<div class="rating-stars" aria-label="' + rating + ' von 5 Sternen">';
+    var html = '<div class="rating-stars" role="img" aria-label="' + rating + ' von 5 Sternen">';
     for (var i = 1; i <= 5; i++) {
       var op = i <= rating ? '1' : '0.25';
       html += '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="' + STAR_PATH + '" fill="#f8b600" opacity="' + op + '"/></svg>';

@@ -6,6 +6,9 @@
   <title>Badrenovierung Neubrandenburg, MV &amp; Berlin — AkkermanStroy</title>
   <meta name="description" content="Komplette Badsanierung aus einer Hand: Rückbau, Verbundabdichtung, Fliesenarbeiten, barrierefreie Dusche und Sanitärmontage. Festpreis nach Ortstermin.">
   <link rel="canonical" href="https://www.akkerman-stroy.de/badrenovierung.html">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -22,9 +25,10 @@
   <meta name="twitter:description" content="Komplette Badsanierung aus einer Hand: Rückbau, Verbundabdichtung, Fliesenarbeiten, barrierefreie Dusche und Sanitärmontage. Festpreis nach Ortstermin.">
   <meta name="twitter:image" content="https://www.akkerman-stroy.de/assets/images/hero-bg.webp">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Manrope:wght@400;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin-be2572.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin-1ab1ad.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/manrope-latin-814019.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles/fonts.css">
 
   <link rel="stylesheet" href="styles/tokens.css">
   <link rel="stylesheet" href="styles/base.css">
@@ -573,7 +577,7 @@
       <div class="navbar__inner">
         <div class="navbar__logo-wrap">
           <a href="index.html" class="navbar__logo" aria-label="AkkermanStroy Startseite">
-            <img src="assets/images/logo-nav.png" alt="AkkermanStroy" class="navbar__logo-img">
+            <img src="assets/images/logo-nav-125.png" srcset="assets/images/logo-nav-125.png 1x, assets/images/logo-nav-250.png 2x, assets/images/logo-nav-375.png 3x" width="125" height="32" alt="AkkermanStroy" class="navbar__logo-img">
           </a>
         </div>
 
@@ -613,7 +617,7 @@
         </nav>
 
         <div class="navbar__actions">
-          <a href="#contact" class="btn btn--accent navbar__cta">
+          <a href="#contact" class="btn btn--accent navbar__cta" aria-label="Kontakt">
             <div class="btn__label"><span>Kontakt</span></div>
             <img src="assets/icons/phone-icon.svg" alt="" class="navbar__cta-icon" aria-hidden="true">
           </a>
@@ -1018,7 +1022,7 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <div class="footer__logo">
-            <img src="assets/images/logo-white.png" alt="AkkermanStroy" class="footer__logo-img">
+            <img src="assets/images/logo-white.png" width="125" height="32" alt="AkkermanStroy" class="footer__logo-img" loading="lazy">
           </div>
           <div class="footer__brand-desc-cover">
             <p>Handwerkskunst, die Räume verwandelt. Ihr Partner für hochwertige Bau- und Renovierungsarbeiten.</p>

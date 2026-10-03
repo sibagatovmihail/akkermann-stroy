@@ -67,6 +67,6 @@ User-agent: CCBot
 Disallow: /
 
 # ---- Nutzungspräferenzen (IETF Content-Signal Draft) ----
-Content-Signal: search=yes, ai-train=yes, ai-retrieval=yes
+# Content-Signal (IETF-Draft, keine robots.txt-Direktive): search=yes, ai-train=yes, ai-retrieval=yes
 
 Sitemap: https://www.akkerman-stroy.de/sitemap.xml
