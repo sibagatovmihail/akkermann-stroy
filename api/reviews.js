@@ -30,6 +30,11 @@
 const ENDPOINT = 'https://places.googleapis.com/v1/places/';
 const FIELDS = 'rating,userRatingCount,googleMapsUri,reviews';
 
+// The key is restricted to HTTP referrers (akkerman-stroy.de/*) in Google Cloud.
+// A server-side fetch sends no referrer, which Google rejects with
+// API_KEY_HTTP_REFERRER_BLOCKED, so the function identifies itself as the site.
+const REFERER = 'https://www.akkerman-stroy.de/';
+
 module.exports = async function handler(req, res) {
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
   const placeId = process.env.GOOGLE_PLACE_ID;
@@ -48,7 +53,7 @@ module.exports = async function handler(req, res) {
   try {
     const url = `${ENDPOINT}${encodeURIComponent(placeId)}?languageCode=${encodeURIComponent(lang)}`;
     const upstream = await fetch(url, {
-      headers: { 'X-Goog-Api-Key': apiKey, 'X-Goog-FieldMask': FIELDS },
+      headers: { 'X-Goog-Api-Key': apiKey, 'X-Goog-FieldMask': FIELDS, Referer: REFERER },
     });
 
     const body = await upstream.json();
