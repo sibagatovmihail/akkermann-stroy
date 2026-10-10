@@ -656,7 +656,7 @@
     fliesen: 'Fliesen',
     boden: 'Boden',
     maler: 'Maler',
-    badrenovierung: 'Badrenovierung',
+    badrenovierung: 'Badsanierung',
     aussen: 'Außen'
   };
 

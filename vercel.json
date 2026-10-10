@@ -3,6 +3,9 @@
   "rewrites": [
     { "source": "/api/auth", "destination": "/api/auth.js" }
   ],
+  "redirects": [
+    { "source": "/badrenovierung.html", "destination": "/badsanierung.html", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

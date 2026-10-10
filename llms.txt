@@ -1,10 +1,10 @@
 # AkkermanStroy
 
-> AkkermanStroy is a German construction and renovation trade business (Handwerksbetrieb) based in Neubrandenburg, Mecklenburg-Vorpommern, carrying out bathroom renovation, flooring, drywall, window and door fitting, and full renovations across Mecklenburg-Vorpommern and Berlin.
+> AkkermanStroy is a German construction and renovation trade business (Handwerksbetrieb) based in Neubrandenburg, Mecklenburg-Vorpommern, specialising in bathroom renovation (Badsanierung), plus flooring, drywall, window and door fitting, and full renovations across Mecklenburg-Vorpommern and Berlin.
 
 ## Leistungen / Services
 
-- [Badrenovierung / Bathroom renovation](https://www.akkerman-stroy.de/badrenovierung.html): Full bathroom renovation from one contractor — strip-out, rough plumbing, composite waterproofing, tiling, barrier-free shower and sanitary fitting. Typical duration for a 6–8 m² bathroom: two to three weeks.
+- [Badsanierung / Bathroom renovation](https://www.akkerman-stroy.de/badsanierung.html): Full bathroom renovation from one contractor — strip-out, rough plumbing, composite waterproofing, tiling, barrier-free shower and sanitary fitting. Typical duration for a 6–8 m² bathroom: two to three weeks.
 - [Bodenverlegung / Flooring](https://www.akkerman-stroy.de/bodenarbeiten.html): Laminate, parquet, vinyl and designer flooring including substrate assessment, levelling and clean edge detailing.
 - [Trockenbau & Innenausbau / Drywall and interior fit-out](https://www.akkerman-stroy.de/innenausbau.html): Stud walls, suspended ceilings and skim finishing to quality levels Q1 to Q4, plus airless coating.
 - [Fenster & Türen / Windows and doors](https://www.akkerman-stroy.de/fenster-tueren.html): Roof window installation, interior doors and frames with correct fitting and clean junctions.

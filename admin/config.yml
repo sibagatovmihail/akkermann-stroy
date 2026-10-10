@@ -43,5 +43,5 @@ collections:
                   - { label: Fliesen, value: fliesen }
                   - { label: Boden, value: boden }
                   - { label: Maler, value: maler }
-                  - { label: Badrenovierung, value: badrenovierung }
+                  - { label: Badsanierung, value: badrenovierung }
                   - { label: Außen, value: aussen }
